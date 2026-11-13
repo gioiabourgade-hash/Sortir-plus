@@ -1,120 +1,78 @@
 const activities = [
-  {id:"ceramique", name:"Atelier céramique", category:"Créatif", price:24, description:"Découvre la poterie et façonne ton propre objet.", emoji:"🏺", place:"Bordeaux"},
-  {id:"escape", name:"Escape game", category:"Jeux", price:22, description:"Une aventure à résoudre en équipe.", emoji:"🔐", place:"Bordeaux"},
-  {id:"escalade", name:"Escalade en salle", category:"Sport", price:16, description:"Bouge et relève un nouveau défi.", emoji:"🧗", place:"Bordeaux Métropole"},
-  {id:"peinture", name:"Atelier peinture", category:"Créatif", price:29, description:"Un moment créatif à partager.", emoji:"🎨", place:"Bordeaux"},
-  {id:"balade", name:"Balade découverte", category:"Sortie", price:12, description:"Redécouvre la ville autrement.", emoji:"🚶", place:"Bordeaux"},
-  {id:"quiz", name:"Quiz entre amis", category:"Jeux", price:18, description:"Teste tes connaissances en équipe.", emoji:"💡", place:"Bordeaux"}
+  {id:"miroir",name:"Miroir d'eau et quais",category:"Loisirs",description:"Une promenade au bord de la Garonne et autour de la place de la Bourse.",place:"Bordeaux centre",lat:44.8413,lng:-0.5707,icon:"⌁"},
+  {id:"jardin-public",name:"Jardin Public",category:"Nature",description:"Un grand jardin pour se promener, faire une pause ou profiter du plein air.",place:"Bordeaux centre",lat:44.8440,lng:-0.5794,icon:"✳"},
+  {id:"darwin",name:"Darwin Écosystème",category:"Loisirs",description:"Un lieu de vie et de découverte sur la rive droite. Vérifie les activités et horaires proposés.",place:"Bordeaux rive droite",lat:44.8378,lng:-0.5518,icon:"↗"},
+  {id:"capc",name:"CAPC – musée d'art contemporain",category:"Culture",description:"Un lieu culturel pour découvrir des expositions d'art contemporain.",place:"Bordeaux centre",lat:44.8492,lng:-0.5727,icon:"▧"},
+  {id:"parc-bordelais",name:"Parc Bordelais",category:"Nature",description:"Un espace vert pour une balade ou un moment en plein air.",place:"Caudéran",lat:44.8567,lng:-0.6084,icon:"✳"},
+  {id:"patinoire",name:"Patinoire de Bordeaux Mériadeck",category:"Sport",description:"Un équipement sportif pour pratiquer le patinage selon les séances ouvertes au public.",place:"Mériadeck",lat:44.8372,lng:-0.5885,icon:"◇"},
+  {id:"musee-aquitaine",name:"Musée d'Aquitaine",category:"Culture",description:"Un musée pour découvrir l'histoire de Bordeaux et de sa région.",place:"Bordeaux centre",lat:44.8376,lng:-0.5762,icon:"▧"},
+  {id:"parc-pey-berland",name:"Place Pey-Berland",category:"Culture",description:"Un point de départ pour découvrir le centre historique et ses monuments.",place:"Bordeaux centre",lat:44.8378,lng:-0.5792,icon:"⌂"}
 ];
-const COMMISSION_RATE = 0.10; // Taux indicatif de démonstration, à négocier avec les partenaires.
 const $ = selector => document.querySelector(selector);
-const euro = amount => new Intl.NumberFormat("fr-FR", {style:"currency", currency:"EUR"}).format(amount);
+let map;
+let markerLayer;
+const categoryColors = {Culture:"#172d35",Sport:"#a77e53",Nature:"#6f8877",Loisirs:"#c18d5c",Famille:"#8b8170"};
 
-function activityCard(activity) {
-  return `<article class="activity-card">
-    <div class="card-visual" aria-hidden="true">${activity.emoji}</div>
-    <div class="card-body">
-      <span class="tag">${activity.category} · ${activity.place}</span>
-      <h3>${activity.name}</h3>
-      <p>${activity.description}</p>
-      <div class="card-bottom"><span class="price">${euro(activity.price)} / pers.</span>
-      <button class="mini-btn" type="button" data-book="${activity.id}">Choisir →</button></div>
-    </div></article>`;
+function activityCard(item){
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name+" "+item.place+" Bordeaux")}`;
+  return `<article class="activity-card"><div class="card-top"><span class="tag">${item.category} · ${item.place}</span><span class="card-symbol" aria-hidden="true">${item.icon}</span></div><h3>${item.name}</h3><p>${item.description}</p><div class="card-bottom"><span>Lieu à découvrir</span><a class="mini-link" href="${mapsUrl}" target="_blank" rel="noopener">Voir sur Maps ↗</a></div></article>`;
 }
-function renderCards() {
-  $("#featuredCards").innerHTML = activities.slice(0,3).map(activityCard).join("");
-  filterCards();
+function renderActivities(){
+  const query = ($('#searchInput')?.value || '').trim().toLocaleLowerCase('fr');
+  const category = $('#categoryFilter')?.value || 'Toutes';
+  const filtered = activities.filter(item => (category === 'Toutes' || item.category === category) && `${item.name} ${item.description} ${item.category} ${item.place}`.toLocaleLowerCase('fr').includes(query));
+  $('#allCards').innerHTML = filtered.length ? filtered.map(activityCard).join('') : '<p>Aucun lieu ne correspond à ta recherche.</p>';
 }
-function filterCards() {
-  const query = ($("#searchInput")?.value || "").trim().toLocaleLowerCase("fr");
-  const category = $("#categoryFilter")?.value || "Toutes";
-  const results = activities.filter(item =>
-    (category === "Toutes" || item.category === category) &&
-    `${item.name} ${item.description} ${item.category} ${item.place}`.toLocaleLowerCase("fr").includes(query)
-  );
-  $("#allCards").innerHTML = results.length ? results.map(activityCard).join("") : "<p>Aucune activité ne correspond à ta recherche.</p>";
+function initMap(){
+  if(map || !window.L || !$('#activityMap')) return;
+  map = L.map('activityMap').setView([44.8378,-0.5792],12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'}).addTo(map);
+  markerLayer = L.layerGroup().addTo(map);
+  renderMapMarkers();
 }
-function fillSelect() {
-  $("#activity").innerHTML = activities.map(item => `<option value="${item.id}">${item.name} — ${euro(item.price)} / personne</option>`).join("");
-}
-function navigate() {
-  const route = (location.hash || "#accueil").slice(1);
-  const allowed = ["accueil","activites","reservation","partenaires","infos"];
-  const target = allowed.includes(route) ? route : "accueil";
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.toggle("active", page.id === "page-" + target);
+function renderMapMarkers(){
+  if(!map || !markerLayer) return;
+  markerLayer.clearLayers();
+  const category = $('#mapCategory')?.value || 'Toutes';
+  activities.filter(item => category === 'Toutes' || item.category === category).forEach(item => {
+    const color = categoryColors[item.category] || '#172d35';
+    const marker = L.circleMarker([item.lat,item.lng],{radius:9,color:'#fff',weight:2,fillColor:color,fillOpacity:1});
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name+" Bordeaux")}`;
+    marker.bindPopup(`<div class="map-popup"><strong>${item.name}</strong><span>${item.category} · ${item.place}</span><br><a href="${mapsUrl}" target="_blank" rel="noopener">Itinéraire Google Maps ↗</a></div>`);
+    marker.addTo(markerLayer);
   });
-  document.querySelectorAll("#mainNav a").forEach(link => {
-    link.classList.toggle("selected", link.getAttribute("href") === "#" + target);
-  });
-  $("#mainNav").classList.remove("open");
-  window.scrollTo({top: 0, behavior: "instant"});
 }
-
-// Navigation robuste : fonctionne aussi sur les liens du pied de page
-// et les liens d'action, sans dépendre uniquement de hashchange.
-document.addEventListener("click", event => {
-  const link = event.target.closest('a[href^="#"]');
-  if (!link) return;
-  const route = link.getAttribute("href").slice(1);
-  if (["accueil","activites","reservation","partenaires","infos"].includes(route)) {
-    event.preventDefault();
-    if (location.hash === "#" + route) navigate();
-    else location.hash = route;
+function navigate(){
+  const route = location.hash.slice(1) || 'accueil';
+  const allowed = ['accueil','activites','carte','evenements','etudiants','decouvrir'];
+  const target = allowed.includes(route) ? route : 'accueil';
+  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+  $('#page-'+target).classList.add('active');
+  document.querySelectorAll('#mainNav a').forEach(link => link.classList.toggle('selected',link.getAttribute('href') === '#'+target));
+  $('#mainNav').classList.remove('open');
+  $('#menuToggle').setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
+  if(target === 'carte'){
+    initMap();
+    setTimeout(()=>map && map.invalidateSize(),100);
   }
-});
-function updateSummary() {
-  const item = activities.find(activity => activity.id === $("#activity").value) || activities[0];
-  const guests = Number($("#guests").value);
-  const subtotal = item.price * guests;
-  const commission = subtotal * COMMISSION_RATE;
-  $("#summaryTotal").textContent = euro(subtotal);
-  $("#summaryCommission").textContent = euro(commission);
-  $("#summaryClient").textContent = euro(subtotal);
 }
-document.addEventListener("click", event => {
-  const button = event.target.closest("[data-book]");
-  if (!button) return;
-  $("#activity").value = button.dataset.book;
-  updateSummary();
-  location.hash = "#reservation";
+$('#menuToggle').addEventListener('click',()=>{
+  const isOpen = $('#mainNav').classList.toggle('open');
+  $('#menuToggle').setAttribute('aria-expanded',String(isOpen));
 });
-$("#menuToggle").addEventListener("click", () => $("#mainNav").classList.toggle("open"));
-$("#searchInput").addEventListener("input", filterCards);
-$("#categoryFilter").addEventListener("change", filterCards);
-$("#activity").addEventListener("change", updateSummary);
-$("#guests").addEventListener("change", updateSummary);
-
-const dateInput = $("#date");
-const today = new Date();
-const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0,10);
-dateInput.min = localToday;
-dateInput.value = localToday;
-
-$("#bookingForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const chosen = activities.find(item => item.id === $("#activity").value);
-  const date = $("#date").value;
-  const guests = Number($("#guests").value);
-  if (!chosen || !date || date < localToday) {
-    $("#bookingResult").textContent = "Vérifie l'activité et choisis une date valide.";
-    return;
-  }
-  updateSummary();
-  $("#bookingResult").innerHTML = `<strong>Récapitulatif prêt — démonstration uniquement.</strong><br>
-    ${chosen.name} · ${guests} participant(s) · ${new Date(date + "T12:00:00").toLocaleDateString("fr-FR")}.<br>
-    Aucun paiement n'a été effectué et aucune réservation n'a été envoyée.`;
+$('#searchInput').addEventListener('input',renderActivities);
+$('#categoryFilter').addEventListener('change',renderActivities);
+$('#mapCategory').addEventListener('change',renderMapMarkers);
+$('#studentCategory').addEventListener('change',event=>{
+  const category=event.target.value;
+  document.querySelectorAll('.student-card').forEach(card=>card.hidden=category!=='Toutes'&&card.dataset.category!==category);
 });
-$("#partnerInterest").addEventListener("click", () => {
-  const business = $("#business").value.trim();
-  const offer = $("#offer").value.trim();
-  $("#partnerResult").textContent = business && offer
-    ? "Merci ! Ton exemple de partenariat est prêt à être discuté. Cette maquette ne transmet pas ces informations."
-    : "Ajoute un nom d'établissement et une courte description de l'activité pour préparer ton exemple.";
-});
-window.addEventListener("hashchange", navigate);
-window.addEventListener("pageshow", navigate);
-renderCards();
-fillSelect();
-updateSummary();
+document.querySelectorAll('[data-go-category]').forEach(link=>link.addEventListener('click',()=>{
+  const category=link.dataset.goCategory;
+  $('#categoryFilter').value=category;
+  renderActivities();
+}));
+window.addEventListener('hashchange',navigate);
+renderActivities();
 navigate();

@@ -1,37 +1,26 @@
-SORTIR+ — VERSION 2 (prototype marketplace)
-=============================================
+SORTIR+ — VERSION 4 : GUIDE DES SORTIES BORDEAUX & ALENTOURS
 
-Fichiers :
-- index.html : pages Accueil, Activités, Réservation, Partenaires et Informations
-- style.css : design responsive ordinateur / mobile
-- script.js : catalogue de démonstration, filtres, calcul du total et commission indicative
+Cette version remplace l'ancien prototype de réservation par un guide de découverte.
 
-MISE À JOUR DU SITE GITHUB
-1. Ouvre le dépôt GitHub Sortir-plus.
-2. Ouvre chaque fichier (index.html, style.css, script.js).
-3. Choisis Edit (icône crayon), remplace tout le contenu par le fichier V2 correspondant.
-4. Enregistre avec Commit changes.
-5. Attends le redéploiement GitHub Pages puis actualise le site.
+Navigation : Accueil, Activités, Carte, Événements, Étudiants, À découvrir.
 
-IMPORTANT — PAIEMENT NON ACTIVÉ
-Ce projet reste une maquette front-end. Le récapitulatif calcule une commission d'exemple de 10 %, mais :
-- aucun paiement n'est effectué ;
-- aucune réservation n'est confirmée ou transmise ;
-- aucune donnée client n'est collectée ou stockée.
+Fonctionnalités :
+- navigation entre les rubriques ;
+- recherche et filtres d'activités ;
+- carte interactive Leaflet avec fond OpenStreetMap ;
+- liens vers les itinéraires Google Maps ;
+- filtre des bons plans étudiants par catégorie.
 
-GitHub Pages héberge des fichiers statiques et ne peut pas protéger des clés secrètes ni gérer seul des paiements marketplace.
-Pour accepter de vrais paiements, il faudra un backend sécurisé et une solution de paiement marketplace (par exemple Stripe Connect), avec validation des partenaires, gestion des remboursements, litiges et reversements. Les clés secrètes ne doivent jamais être placées dans index.html ou script.js.
+À savoir :
+- aucun système de réservation, paiement, prix ou commission n'est présent ;
+- les marqueurs de la carte sont des lieux de repère initiaux à enrichir ;
+- aucune réduction étudiante n'est inventée : les offres restent indiquées comme « à confirmer » tant qu'elles ne sont pas vérifiées auprès des établissements ;
+- la carte nécessite une connexion internet pour charger Leaflet et les tuiles OpenStreetMap.
 
-Le taux de 10 % est uniquement un exemple à discuter avec les partenaires. Les frais du prestataire de paiement, remboursements, taxes et obligations légales ne sont pas inclus dans ce calcul.
-Avant toute activité commerciale ou ouverture de comptes de paiement, fais-toi accompagner par un parent/tuteur et un adulte responsable du projet.
+INSTALLATION GITHUB PAGES
+1. Fais une copie de sauvegarde de tes fichiers actuels.
+2. Dans le dépôt Sortir-plus, branche main, remplace index.html, style.css et script.js par ceux de cette archive.
+3. Ajoute aussi sitemap.xml et robots.txt s'ils ne sont pas déjà à jour.
+4. Commit changes puis attends le déploiement GitHub Pages.
 
-
-REFERENCEMENT GOOGLE (SEO)
-- index.html contient un titre, une description et des balises de partage.
-- sitemap.xml indique à Google l'adresse de la page d'accueil.
-- robots.txt autorise l'exploration et indique le sitemap.
-Après mise en ligne, ajoute l'adresse du site dans Google Search Console, vérifie la propriété, soumets sitemap.xml puis demande l'indexation de la page d'accueil. L'indexation n'est pas garantie et peut prendre plusieurs jours ou semaines.
-
-
-CORRECTION NAVIGATION
-Cette version corrige le routage des liens internes : les liens Accueil, Activités, Réserver, Partenaires et Informations changent explicitement de vue. Remplacer index.html, script.js et style.css à la racine du dépôt.
+La structure reste composée de sections sur une seule page : les liens utilisent les ancres #accueil, #activites, #carte, #evenements, #etudiants et #decouvrir.
