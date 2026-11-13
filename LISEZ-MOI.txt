@@ -1,0 +1,14 @@
+SORTIR+ — PACK SEO CORRIGÉ
+
+IMPORTANT : les fichiers sont directement à la racine de l’archive (pas dans un sous-dossier).
+
+Dans GitHub > dépôt Sortir-plus :
+1. Ouvre le dépôt et vérifie que tu es sur la branche main.
+2. Les fichiers index.html, style.css et script.js doivent être au même niveau, à la racine.
+3. Téléverse les 5 fichiers de cette archive directement à cet endroit, sans créer de dossier SORTIR_PLUS_V2.
+4. Accepte le remplacement des fichiers existants puis Commit changes.
+5. Attends la fin du déploiement GitHub Pages et recharge le site.
+
+Les pages internes sont des sections accessibles par les liens du menu (Accueil, Activités, Partenaires, Réserver, Informations).
+
+Prototype : les réservations et paiements ne sont pas encore transmis ni traités réellement.
