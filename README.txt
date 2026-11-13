@@ -1,23 +1,33 @@
-SORTIR+ — site vitrine prototype
-================================
+SORTIR+ — VERSION 2 (prototype marketplace)
+=============================================
 
-Contenu
-- index.html : site multi-rubriques (Accueil, Activités, Réserver, Partenaires, Espace de gestion démo)
-- style.css : identité visuelle responsive
-- script.js : navigation, filtres et interactions de démonstration
+Fichiers :
+- index.html : pages Accueil, Activités, Réservation, Partenaires et Informations
+- style.css : design responsive ordinateur / mobile
+- script.js : catalogue de démonstration, filtres, calcul du total et commission indicative
 
-IMPORTANT
-Cette version est un prototype statique. Les activités, prix et disponibilités sont fictifs.
-Les formulaires ne transmettent aucune demande et ne stockent aucune donnée.
-L'espace de gestion est public et n'est pas sécurisé : ne l'utilisez pas pour gérer de vrais clients.
-Ne publiez pas de vraies activités avant d'avoir obtenu l'accord des professionnels et vérifié les prix, créneaux, assurances, conditions de réservation et obligations légales.
+MISE À JOUR DU SITE GITHUB
+1. Ouvre le dépôt GitHub Sortir-plus.
+2. Ouvre chaque fichier (index.html, style.css, script.js).
+3. Choisis Edit (icône crayon), remplace tout le contenu par le fichier V2 correspondant.
+4. Enregistre avec Commit changes.
+5. Attends le redéploiement GitHub Pages puis actualise le site.
 
-Publication gratuite possible
-1. Créez un compte GitHub.
-2. Créez un nouveau dépôt public nommé sortir-plus.
-3. Importez les trois fichiers (index.html, style.css, script.js) à la racine.
-4. Dans Settings > Pages, choisissez Deploy from a branch, puis main et / (root).
-5. GitHub Pages fournira une adresse publique.
+IMPORTANT — PAIEMENT NON ACTIVÉ
+Ce projet reste une maquette front-end. Le récapitulatif calcule une commission d'exemple de 10 %, mais :
+- aucun paiement n'est effectué ;
+- aucune réservation n'est confirmée ou transmise ;
+- aucune donnée client n'est collectée ou stockée.
 
-Pour les vraies réservations
-Il faudra remplacer la démonstration par un formulaire connecté à un service qui collecte et transmet les demandes de manière sécurisée, avec information de confidentialité, règles de conservation, consentement adapté et accès réservé aux personnes autorisées. Une simple page HTML ne permet pas de créer un système partagé et sécurisé de réservation.
+GitHub Pages héberge des fichiers statiques et ne peut pas protéger des clés secrètes ni gérer seul des paiements marketplace.
+Pour accepter de vrais paiements, il faudra un backend sécurisé et une solution de paiement marketplace (par exemple Stripe Connect), avec validation des partenaires, gestion des remboursements, litiges et reversements. Les clés secrètes ne doivent jamais être placées dans index.html ou script.js.
+
+Le taux de 10 % est uniquement un exemple à discuter avec les partenaires. Les frais du prestataire de paiement, remboursements, taxes et obligations légales ne sont pas inclus dans ce calcul.
+Avant toute activité commerciale ou ouverture de comptes de paiement, fais-toi accompagner par un parent/tuteur et un adulte responsable du projet.
+
+
+REFERENCEMENT GOOGLE (SEO)
+- index.html contient un titre, une description et des balises de partage.
+- sitemap.xml indique à Google l'adresse de la page d'accueil.
+- robots.txt autorise l'exploration et indique le sitemap.
+Après mise en ligne, ajoute l'adresse du site dans Google Search Console, vérifie la propriété, soumets sitemap.xml puis demande l'indexation de la page d'accueil. L'indexation n'est pas garantie et peut prendre plusieurs jours ou semaines.

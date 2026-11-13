@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="SORTIR+ : découvre des activités et expériences près de Bordeaux.">
-<meta name="theme-color" content="#172d35">
-<title>SORTIR+ — La vie se passe dehors</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SORTIR+ : découvre des idées de loisirs, sorties et événements à Bordeaux et alentours. Explore des expériences locales et prépare ta prochaine sortie.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gioiabourgade-hash.github.io/Sortir-plus/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="SORTIR+">
+  <meta property="og:title" content="SORTIR+ — Idées de sorties à Bordeaux">
+  <meta property="og:description" content="Découvre des idées de loisirs, sorties et événements à Bordeaux et alentours.">
+  <meta property="og:url" content="https://gioiabourgade-hash.github.io/Sortir-plus/">
+  <meta name="theme-color" content="#172d35">
+  <title>SORTIR+ | Loisirs, sorties et événements à Bordeaux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="#accueil" aria-label="SORTIR+ accueil">SORTIR<span>+</span></a>
+  <a class="brand" href="#accueil">SORTIR<span>+</span></a>
   <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
   <nav id="mainNav">
-    <a href="#accueil">Accueil</a><a href="#activites">Activités</a>
-    <a href="#partenaires">Partenaires</a><a class="nav-cta" href="#reservation">Réserver</a>
+    <a href="#accueil">Accueil</a>
+    <a href="#activites">Activités</a>
+    <a href="#partenaires">Partenaires</a>
+    <a class="nav-cta" href="#reservation">Réserver</a>
   </nav>
 </header>
 
@@ -27,68 +37,131 @@
     <div class="hero-copy">
       <p class="eyebrow">BORDEAUX & ALENTOURS</p>
       <h1>La vie se passe <em>dehors.</em></h1>
-      <p class="lead">Des idées de sorties, des expériences locales et de nouvelles choses à partager.</p>
-      <div class="hero-actions"><a class="btn btn-light" href="#activites">Explorer les activités</a><a class="text-link" href="#partenaires">Vous êtes professionnel ? →</a></div>
+      <p class="lead">Trouve une expérience à partager. Choisis, réserve et prépare ta prochaine sortie avec SORTIR+.</p>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="#activites">Explorer les activités</a>
+        <a class="text-link" href="#partenaires">Vous êtes professionnel ? →</a>
+      </div>
+      <p class="hero-note">Une sélection locale · Des sorties à partager · Un seul endroit</p>
     </div>
-    <div class="hero-art" role="img" aria-label="Ambiance conviviale d'une sortie entre amis">
+    <div class="hero-art" aria-label="Illustration graphique SORTIR+">
       <div class="art-card art-one"><span>01 / DÉCOUVRIR</span><b>De nouvelles<br>expériences.</b></div>
       <div class="art-card art-two"><span>02 / PARTAGER</span><b>De bons<br>moments.</b></div>
       <div class="art-orb"></div>
     </div>
   </div>
   <div class="section wrap">
-    <div class="section-heading"><div><p class="eyebrow dark">SÉLECTION SORTIR+</p><h2>On fait quoi cette semaine ?</h2></div><a class="text-link dark-link" href="#activites">Tout explorer →</a></div>
+    <div class="section-heading">
+      <div><p class="eyebrow dark">SÉLECTION SORTIR+</p><h2>On fait quoi cette semaine ?</h2></div>
+      <a class="text-link dark-link" href="#activites">Tout explorer →</a>
+    </div>
     <div class="cards" id="featuredCards"></div>
+    <p class="notice">Les activités et tarifs sont des exemples de démonstration. Ils ne correspondent pas à des offres partenaires confirmées.</p>
   </div>
   <section class="band">
     <div class="wrap band-inner"><div><p class="eyebrow">UNE BONNE ADRESSE À PARTAGER</p><h2>Les meilleures sorties<br>commencent ici.</h2></div><a class="btn btn-dark" href="#activites">Trouver une activité</a></div>
   </section>
   <div class="wrap how section">
     <p class="eyebrow dark">SIMPLE COMME BONJOUR</p><h2>Comment ça marche ?</h2>
-    <div class="steps"><article><b>01</b><h3>Tu explores</h3><p>Découvre des idées de sorties autour de Bordeaux.</p></article><article><b>02</b><h3>Tu demandes</h3><p>Choisis une activité et envoie une demande de réservation.</p></article><article><b>03</b><h3>Tu profites</h3><p>Le professionnel confirme les disponibilités avec toi.</p></article></div>
+    <div class="steps">
+      <article><b>01</b><h3>Tu explores</h3><p>Découvre des expériences locales et choisis celle qui te plaît.</p></article>
+      <article><b>02</b><h3>Tu réserves</h3><p>Choisis une date et le nombre de participants, puis vérifie ton récapitulatif.</p></article>
+      <article><b>03</b><h3>Tu profites</h3><p>Quand le service sera activé, le paiement et la confirmation seront gérés en ligne.</p></article>
+    </div>
   </div>
 </section>
 
 <section class="page wrap section" id="page-activites">
-  <p class="eyebrow dark">À TOI DE CHOISIR</p><h1 class="page-title">Explorer les activités.</h1>
+  <p class="eyebrow dark">À TOI DE CHOISIR</p>
+  <h1 class="page-title">Explorer les activités.</h1>
   <p class="lead dark-lead">Des idées pour sortir de la routine, entre amis ou à deux.</p>
-  <div class="filters"><input id="searchInput" type="search" placeholder="Rechercher une activité…"><select id="categoryFilter"><option value="Toutes">Toutes les catégories</option><option>Créatif</option><option>Sport</option><option>Jeux</option><option>Sortie</option></select></div>
+  <div class="filters">
+    <input id="searchInput" type="search" placeholder="Rechercher une activité…" aria-label="Rechercher une activité">
+    <select id="categoryFilter" aria-label="Filtrer par catégorie">
+      <option value="Toutes">Toutes les catégories</option><option>Créatif</option><option>Jeux</option><option>Sport</option><option>Sortie</option>
+    </select>
+  </div>
   <div class="cards" id="allCards"></div>
-  <p class="notice">Les fiches présentées sont des exemples de démonstration. Les offres, prix et disponibilités ne sont pas encore confirmés par des établissements partenaires.</p>
+  <p class="notice">Catalogue de démonstration : les établissements, prix et disponibilités doivent être vérifiés et confirmés avant toute mise en vente.</p>
 </section>
 
 <section class="page wrap section" id="page-reservation">
-  <p class="eyebrow dark">TA PROCHAINE SORTIE</p><h1 class="page-title">Faire une demande.</h1>
-  <p class="lead dark-lead">Choisis une activité et indique tes disponibilités. Le formulaire de cette version est une démonstration : il ne transmet pas encore la demande à un professionnel.</p>
-  <form class="form-card" id="bookingForm">
-    <div class="field"><label for="activity">Activité souhaitée</label><select id="activity" required></select></div>
-    <div class="form-grid"><div class="field"><label for="fullName">Prénom et nom</label><input id="fullName" autocomplete="name" required placeholder="Ton nom"></div><div class="field"><label for="email">Adresse e-mail</label><input id="email" type="email" autocomplete="email" required placeholder="toi@exemple.fr"></div></div>
-    <div class="form-grid"><div class="field"><label for="date">Date souhaitée</label><input id="date" type="date" required></div><div class="field"><label for="guests">Nombre de personnes</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div></div>
-    <div class="field"><label for="details">Précisions (facultatif)</label><textarea id="details" rows="3" placeholder="Horaire souhaité, question…"></textarea></div>
-    <label class="check"><input id="consent" type="checkbox" required><span>J'accepte que mes informations soient utilisées pour traiter cette demande de démonstration.</span></label>
-    <button class="btn btn-dark" type="submit">Préparer ma demande</button>
-    <p class="small muted">Ne saisis pas de données personnelles réelles dans cette maquette. Aucune donnée n'est envoyée ni stockée.</p>
-    <div id="bookingResult" class="result" role="status" aria-live="polite"></div>
-  </form>
+  <p class="eyebrow dark">TA PROCHAINE SORTIE</p>
+  <h1 class="page-title">Préparer une réservation.</h1>
+  <p class="lead dark-lead">Choisis une activité, une date et le nombre de participants. Tu verras ensuite le récapitulatif de ta commande.</p>
+  <div class="booking-layout">
+    <form class="form-card" id="bookingForm">
+      <div class="field"><label for="activity">Activité</label><select id="activity" required></select></div>
+      <div class="form-grid">
+        <div class="field"><label for="date">Date souhaitée</label><input id="date" type="date" required></div>
+        <div class="field"><label for="guests">Participants</label><select id="guests"><option value="1">1 personne</option><option value="2" selected>2 personnes</option><option value="3">3 personnes</option><option value="4">4 personnes</option><option value="5">5 personnes</option><option value="6">6 personnes</option></select></div>
+      </div>
+      <div class="field"><label for="notes">Précisions (facultatif)</label><textarea id="notes" rows="3" placeholder="Horaire préféré ou question…"></textarea></div>
+      <button class="btn btn-dark" type="submit">Calculer mon récapitulatif</button>
+      <p class="small muted">Version de démonstration : n'entre aucune donnée personnelle ou bancaire réelle. Aucune réservation n'est transmise.</p>
+    </form>
+    <aside class="summary-card" id="orderSummary" aria-live="polite">
+      <p class="eyebrow dark">RÉCAPITULATIF</p>
+      <h2>Ta prochaine sortie</h2>
+      <p class="muted">Choisis une activité et valide le formulaire pour afficher le détail de ta commande.</p>
+      <div class="summary-line"><span>Montant</span><strong id="summaryTotal">—</strong></div>
+      <div class="summary-line"><span>Commission partenaire (exemple 10 %)</span><strong id="summaryCommission">—</strong></div>
+      <div class="summary-line total"><span>Total client</span><strong id="summaryClient">—</strong></div>
+      <div class="payment-demo">
+        <span class="lock">◇</span>
+        <strong>Paiement en ligne bientôt disponible</strong>
+        <p>Le paiement réel sera activé après la mise en place d'un prestataire de paiement et d'un système serveur sécurisé.</p>
+        <button class="btn btn-disabled" type="button" disabled>Paiement non activé</button>
+      </div>
+    </aside>
+  </div>
+  <div id="bookingResult" class="result" role="status" aria-live="polite"></div>
 </section>
 
 <section class="page wrap section" id="page-partenaires">
-  <p class="eyebrow dark">PROFESSIONNELS & ORGANISATEURS</p><h1 class="page-title">Faites découvrir<br>vos expériences.</h1>
-  <p class="lead dark-lead">SORTIR+ souhaite mettre en lumière les activités locales et aider les personnes à trouver leur prochaine sortie.</p>
+  <p class="eyebrow dark">PROFESSIONNELS & ORGANISATEURS</p>
+  <h1 class="page-title">Faites découvrir<br>vos expériences.</h1>
+  <p class="lead dark-lead">SORTIR+ souhaite mettre en lumière les activités locales et aider les habitants à trouver leur prochaine sortie.</p>
   <div class="partner-layout">
-    <div class="partner-benefits"><article><b>01</b><h3>Présentez votre activité</h3><p>Une fiche claire avec description, tarif indicatif et informations pratiques.</p></article><article><b>02</b><h3>Gagnez en visibilité</h3><p>Faites découvrir votre offre à une communauté locale.</p></article><article><b>03</b><h3>Recevez des demandes</h3><p>Échangeons sur un fonctionnement simple et transparent.</p></article></div>
-    <form class="form-card" id="partnerForm"><h2>Proposer un partenariat</h2><div class="field"><label for="business">Nom de l'établissement</label><input id="business" required></div><div class="field"><label for="contact">Nom du contact</label><input id="contact" required></div><div class="field"><label for="partnerEmail">E-mail professionnel</label><input id="partnerEmail" type="email" required></div><div class="field"><label for="offer">Activité proposée</label><textarea id="offer" rows="3" required></textarea></div><button class="btn btn-dark" type="submit">Préparer le message</button><p class="small muted">Démonstration uniquement : ce formulaire ne transmet pas encore les informations.</p><div id="partnerResult" class="result" role="status"></div></form>
+    <div class="partner-benefits">
+      <article><b>01</b><h3>Présentez votre activité</h3><p>Une fiche claire avec description, tarif et informations pratiques.</p></article>
+      <article><b>02</b><h3>Gagnez en visibilité</h3><p>Faites découvrir votre offre à une communauté locale.</p></article>
+      <article><b>03</b><h3>Une commission transparente</h3><p>Le principe envisagé : SORTIR+ perçoit une commission sur les réservations réalisées via la plateforme. Le taux final sera fixé avec chaque partenaire.</p></article>
+    </div>
+    <div class="form-card">
+      <h2>Devenir partenaire</h2>
+      <p>Pour le moment, contacte l'équipe du projet pour discuter d'un partenariat pilote.</p>
+      <div class="field"><label for="business">Nom de l'établissement</label><input id="business" placeholder="Ex. Atelier créatif"></div>
+      <div class="field"><label for="offer">Activité proposée</label><textarea id="offer" rows="3" placeholder="Décris brièvement l'expérience…"></textarea></div>
+      <button class="btn btn-dark" id="partnerInterest" type="button">Afficher les prochaines étapes</button>
+      <div id="partnerResult" class="result" role="status"></div>
+      <p class="small muted">Formulaire de démonstration uniquement : il ne transmet aucune information.</p>
+    </div>
   </div>
 </section>
 
-<section class="page wrap section" id="page-espace">
-  <p class="eyebrow dark">OUTIL INTERNE DE DÉMONSTRATION</p><h1 class="page-title">Espace de gestion.</h1>
-  <div class="notice warning">Cet espace est une maquette locale, sans compte ni sécurité. Ne l'utilise pas pour gérer de vraies réservations ou des données clients.</div>
-  <div class="admin-grid"><div class="stat"><span>Activités exemples</span><b id="adminActivities">6</b></div><div class="stat"><span>Demandes reçues en ligne</span><b>0</b></div><div class="stat"><span>Partenaires confirmés</span><b>0</b></div></div>
-  <div class="form-card"><h2>Suivi manuel des demandes</h2><p>Dans cette version, aucune demande n'est enregistrée. Une fois le formulaire connecté à un service sécurisé, les demandes pourront apparaître ici avec un statut « À traiter », « Acceptée » ou « Refusée ».</p><p class="muted small">Accès de démonstration : cette page est visible par toute personne qui possède le lien du site.</p></div>
+<section class="page wrap section" id="page-infos">
+  <p class="eyebrow dark">TRANSPARENCE</p>
+  <h1 class="page-title">Informations importantes.</h1>
+  <div class="info-panel">
+    <h2>Une maquette, pas encore un service de paiement</h2>
+    <p>Cette version permet de tester le parcours et le calcul d'une commission indicative. Elle ne prend pas de paiement, ne confirme pas de réservation et ne transmet pas les demandes à un établissement.</p>
+    <h2>Comment la commission est calculée</h2>
+    <p>Exemple pédagogique : pour une commande de 100 €, une commission hypothétique de 10 % représente 10 €. Le montant réellement reversé au partenaire dépendra du contrat, des frais de paiement, des remboursements et des règles applicables.</p>
+    <h2>Avant le lancement commercial</h2>
+    <p>Il faudra notamment un backend sécurisé, un prestataire de paiement adapté aux marketplaces, l'accord des partenaires, des conditions de vente et d'annulation, une politique de confidentialité et la vérification des obligations légales et fiscales.</p>
+  </div>
 </section>
 </main>
 
-<footer><div class="wrap footer-inner"><a class="brand light-brand" href="#accueil">SORTIR<span>+</span></a><p>Découvrir · Réserver · Profiter</p><div><a href="#partenaires">Devenir partenaire</a><a href="#espace">Espace de gestion (démo)</a></div><small>© 2026 SORTIR+ — Projet en lancement à Bordeaux. Les activités affichées sont fictives et non réservables à ce stade.</small></div></footer>
+<footer>
+  <div class="wrap footer-inner">
+    <a class="brand light-brand" href="#accueil">SORTIR<span>+</span></a>
+    <p>Découvrir · Réserver · Profiter</p>
+    <div><a href="#partenaires">Devenir partenaire</a><a href="#infos">Informations</a></div>
+    <small>© 2026 SORTIR+ — Prototype en préparation à Bordeaux. Activités et prix fictifs. Aucun paiement ni réservation réelle.</small>
+  </div>
+</footer>
 <script src="script.js"></script>
-</body></html>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gioiabourgade-hash.github.io/Sortir-plus/sitemap.xml
