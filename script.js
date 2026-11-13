@@ -1,78 +1,38 @@
 const activities = [
-  {id:"miroir",name:"Miroir d'eau et quais",category:"Loisirs",description:"Une promenade au bord de la Garonne et autour de la place de la Bourse.",place:"Bordeaux centre",lat:44.8413,lng:-0.5707,icon:"⌁"},
-  {id:"jardin-public",name:"Jardin Public",category:"Nature",description:"Un grand jardin pour se promener, faire une pause ou profiter du plein air.",place:"Bordeaux centre",lat:44.8440,lng:-0.5794,icon:"✳"},
-  {id:"darwin",name:"Darwin Écosystème",category:"Loisirs",description:"Un lieu de vie et de découverte sur la rive droite. Vérifie les activités et horaires proposés.",place:"Bordeaux rive droite",lat:44.8378,lng:-0.5518,icon:"↗"},
-  {id:"capc",name:"CAPC – musée d'art contemporain",category:"Culture",description:"Un lieu culturel pour découvrir des expositions d'art contemporain.",place:"Bordeaux centre",lat:44.8492,lng:-0.5727,icon:"▧"},
-  {id:"parc-bordelais",name:"Parc Bordelais",category:"Nature",description:"Un espace vert pour une balade ou un moment en plein air.",place:"Caudéran",lat:44.8567,lng:-0.6084,icon:"✳"},
-  {id:"patinoire",name:"Patinoire de Bordeaux Mériadeck",category:"Sport",description:"Un équipement sportif pour pratiquer le patinage selon les séances ouvertes au public.",place:"Mériadeck",lat:44.8372,lng:-0.5885,icon:"◇"},
-  {id:"musee-aquitaine",name:"Musée d'Aquitaine",category:"Culture",description:"Un musée pour découvrir l'histoire de Bordeaux et de sa région.",place:"Bordeaux centre",lat:44.8376,lng:-0.5762,icon:"▧"},
-  {id:"parc-pey-berland",name:"Place Pey-Berland",category:"Culture",description:"Un point de départ pour découvrir le centre historique et ses monuments.",place:"Bordeaux centre",lat:44.8378,lng:-0.5792,icon:"⌂"}
+{id:"miroir",name:"Miroir d'eau et quais",category:"Loisirs",description:"Une promenade au bord de la Garonne et autour de la place de la Bourse.",place:"Bordeaux centre",lat:44.8413,lng:-0.5707,icon:"⌁",budget:"Gratuit",setting:"Extérieur",transport:"Tram A, C et D"},
+{id:"jardin-public",name:"Jardin Public",category:"Nature",description:"Un grand jardin pour se promener, faire une pause ou profiter du plein air.",place:"Bordeaux centre",lat:44.8440,lng:-0.5794,icon:"✳",budget:"Gratuit",setting:"Extérieur",transport:"Tram C"},
+{id:"darwin",name:"Darwin Écosystème",category:"Loisirs",description:"Un lieu de vie de la rive droite avec espaces de découverte et programmation variable.",place:"Bordeaux rive droite",lat:44.8378,lng:-0.5518,icon:"↗",budget:"Petit budget",setting:"Intérieur",transport:"Tram A"},
+{id:"capc",name:"CAPC – musée d'art contemporain",category:"Culture",description:"Un lieu culturel pour découvrir des expositions d'art contemporain.",place:"Bordeaux centre",lat:44.8492,lng:-0.5727,icon:"▧",budget:"Payant",setting:"Intérieur",transport:"Tram B"},
+{id:"parc-bordelais",name:"Parc Bordelais",category:"Nature",description:"Un espace vert pour une balade ou un moment en plein air.",place:"Caudéran",lat:44.8567,lng:-0.6084,icon:"✳",budget:"Gratuit",setting:"Extérieur",transport:"Bus TBM"},
+{id:"patinoire",name:"Patinoire de Bordeaux Mériadeck",category:"Sport",description:"Un équipement sportif pour pratiquer le patinage selon les séances ouvertes au public.",place:"Mériadeck",lat:44.8372,lng:-0.5885,icon:"◇",budget:"Payant",setting:"Intérieur",transport:"Tram A"},
+{id:"musee-aquitaine",name:"Musée d'Aquitaine",category:"Culture",description:"Un musée pour découvrir l'histoire de Bordeaux et de sa région.",place:"Bordeaux centre",lat:44.8376,lng:-0.5762,icon:"▧",budget:"Payant",setting:"Intérieur",transport:"Tram B"},
+{id:"pey-berland",name:"Place Pey-Berland",category:"Culture",description:"Un point de départ pour découvrir le centre historique et ses monuments.",place:"Bordeaux centre",lat:44.8378,lng:-0.5792,icon:"⌂",budget:"Gratuit",setting:"Extérieur",transport:"Tram A et B"},
+{id:"parc-floral",name:"Parc floral de Bordeaux",category:"Nature",description:"Un grand espace paysager pour une promenade au nord de Bordeaux.",place:"Bordeaux-Lac",lat:44.8892,lng:-0.5660,icon:"✳",budget:"Gratuit",setting:"Extérieur",transport:"Bus TBM"},
+{id:"base-sous-marine",name:"Base sous-marine / Bassins des Lumières",category:"Culture",description:"Un lieu culturel installé dans une ancienne base sous-marine. Vérifie l'exposition et les horaires en cours.",place:"Bordeaux-Bacalan",lat:44.8714,lng:-0.5608,icon:"▧",budget:"Payant",setting:"Intérieur",transport:"Tram B puis bus"}
 ];
-const $ = selector => document.querySelector(selector);
-let map;
-let markerLayer;
-const categoryColors = {Culture:"#172d35",Sport:"#a77e53",Nature:"#6f8877",Loisirs:"#c18d5c",Famille:"#8b8170"};
-
-function activityCard(item){
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name+" "+item.place+" Bordeaux")}`;
-  return `<article class="activity-card"><div class="card-top"><span class="tag">${item.category} · ${item.place}</span><span class="card-symbol" aria-hidden="true">${item.icon}</span></div><h3>${item.name}</h3><p>${item.description}</p><div class="card-bottom"><span>Lieu à découvrir</span><a class="mini-link" href="${mapsUrl}" target="_blank" rel="noopener">Voir sur Maps ↗</a></div></article>`;
-}
-function renderActivities(){
-  const query = ($('#searchInput')?.value || '').trim().toLocaleLowerCase('fr');
-  const category = $('#categoryFilter')?.value || 'Toutes';
-  const filtered = activities.filter(item => (category === 'Toutes' || item.category === category) && `${item.name} ${item.description} ${item.category} ${item.place}`.toLocaleLowerCase('fr').includes(query));
-  $('#allCards').innerHTML = filtered.length ? filtered.map(activityCard).join('') : '<p>Aucun lieu ne correspond à ta recherche.</p>';
-}
-function initMap(){
-  if(map || !window.L || !$('#activityMap')) return;
-  map = L.map('activityMap').setView([44.8378,-0.5792],12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'}).addTo(map);
-  markerLayer = L.layerGroup().addTo(map);
-  renderMapMarkers();
-}
-function renderMapMarkers(){
-  if(!map || !markerLayer) return;
-  markerLayer.clearLayers();
-  const category = $('#mapCategory')?.value || 'Toutes';
-  activities.filter(item => category === 'Toutes' || item.category === category).forEach(item => {
-    const color = categoryColors[item.category] || '#172d35';
-    const marker = L.circleMarker([item.lat,item.lng],{radius:9,color:'#fff',weight:2,fillColor:color,fillOpacity:1});
-    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name+" Bordeaux")}`;
-    marker.bindPopup(`<div class="map-popup"><strong>${item.name}</strong><span>${item.category} · ${item.place}</span><br><a href="${mapsUrl}" target="_blank" rel="noopener">Itinéraire Google Maps ↗</a></div>`);
-    marker.addTo(markerLayer);
-  });
-}
-function navigate(){
-  const route = location.hash.slice(1) || 'accueil';
-  const allowed = ['accueil','activites','carte','evenements','etudiants','decouvrir'];
-  const target = allowed.includes(route) ? route : 'accueil';
-  document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-  $('#page-'+target).classList.add('active');
-  document.querySelectorAll('#mainNav a').forEach(link => link.classList.toggle('selected',link.getAttribute('href') === '#'+target));
-  $('#mainNav').classList.remove('open');
-  $('#menuToggle').setAttribute('aria-expanded','false');
-  window.scrollTo(0,0);
-  if(target === 'carte'){
-    initMap();
-    setTimeout(()=>map && map.invalidateSize(),100);
-  }
-}
-$('#menuToggle').addEventListener('click',()=>{
-  const isOpen = $('#mainNav').classList.toggle('open');
-  $('#menuToggle').setAttribute('aria-expanded',String(isOpen));
-});
-$('#searchInput').addEventListener('input',renderActivities);
-$('#categoryFilter').addEventListener('change',renderActivities);
+const $ = s => document.querySelector(s); let map, markerLayer; let favorites = new Set();
+try { favorites = new Set(JSON.parse(localStorage.getItem('sortirPlusFavorites') || '[]')); } catch(e) {}
+const colors={Culture:'#172d35',Sport:'#a77e53',Nature:'#6f8877',Loisirs:'#c18d5c',Famille:'#8b8170'};
+function mapsUrl(item){return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(item.name+' '+item.place+' Bordeaux')}`;}
+function activityCard(item){return `<article class="activity-card"><div class="card-top"><span class="tag">${item.category} · ${item.place}</span><button class="favorite-btn ${favorites.has(item.id)?'is-favorite':''}" data-favorite="${item.id}" aria-label="${favorites.has(item.id)?'Retirer des':'Ajouter aux'} favoris">${favorites.has(item.id)?'♥':'♡'}</button></div><h3>${item.name}</h3><p>${item.description}</p><div class="card-meta"><span>${item.budget}</span><span>${item.setting}</span><span>${item.transport}</span></div><div class="card-bottom"><span>Lieu à découvrir</span><a class="mini-link" href="${mapsUrl(item)}" target="_blank" rel="noopener">Itinéraire ↗</a></div></article>`;}
+function renderActivities(){const q=($('#searchInput')?.value||'').trim().toLocaleLowerCase('fr'),cat=$('#categoryFilter')?.value||'Toutes',budget=$('#budgetFilter')?.value||'Tous',setting=$('#settingFilter')?.value||'Tous',onlyFav=$('#showFavorites')?.getAttribute('aria-pressed')==='true';const items=activities.filter(x=>(cat==='Toutes'||x.category===cat)&&(budget==='Tous'||x.budget===budget)&&(setting==='Tous'||x.setting===setting)&&(!onlyFav||favorites.has(x.id))&&`${x.name} ${x.description} ${x.category} ${x.place}`.toLocaleLowerCase('fr').includes(q));$('#allCards').innerHTML=items.length?items.map(activityCard).join(''):'<p>Aucun lieu ne correspond à ces filtres. Essaie une autre recherche.</p>';}
+function initMap(){if(map||!window.L||!$('#activityMap'))return;map=L.map('activityMap').setView([44.8378,-0.5792],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);markerLayer=L.layerGroup().addTo(map);renderMapMarkers();}
+function renderMapMarkers(){if(!map||!markerLayer)return;markerLayer.clearLayers();const cat=$('#mapCategory')?.value||'Toutes';activities.filter(x=>cat==='Toutes'||x.category===cat).forEach(x=>{const marker=L.circleMarker([x.lat,x.lng],{radius:9,color:'#fff',weight:2,fillColor:colors[x.category]||'#172d35',fillOpacity:1});marker.bindPopup(`<div class="map-popup"><strong>${x.name}</strong><span>${x.category} · ${x.place}</span><br><a href="${mapsUrl(x)}" target="_blank" rel="noopener">Itinéraire ↗</a></div>`).addTo(markerLayer);});}
+function navigate(){const route=location.hash.slice(1)||'accueil',allowed=['accueil','activites','carte','evenements','etudiants','decouvrir'],target=allowed.includes(route)?route:'accueil';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$('#page-'+target)?.classList.add('active');document.querySelectorAll('#mainNav a').forEach(a=>a.classList.toggle('selected',a.getAttribute('href')==='#'+target));$('#mainNav').classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');window.scrollTo(0,0);if(target==='carte'){initMap();setTimeout(()=>map&&map.invalidateSize(),120);}}
+$('#menuToggle').addEventListener('click',()=>{const open=$('#mainNav').classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(open));});
+['searchInput','categoryFilter','budgetFilter','settingFilter'].forEach(id=>$('#'+id)?.addEventListener(id==='searchInput'?'input':'change',renderActivities));
+$('#showFavorites')?.addEventListener('click',()=>{const b=$('#showFavorites'),on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));b.textContent=on?'♥ Favoris uniquement':'♡ Mes favoris';renderActivities();});
+$('#allCards')?.addEventListener('click',e=>{const b=e.target.closest('[data-favorite]');if(!b)return;const id=b.dataset.favorite;favorites.has(id)?favorites.delete(id):favorites.add(id);localStorage.setItem('sortirPlusFavorites',JSON.stringify([...favorites]));renderActivities();});
 $('#mapCategory').addEventListener('change',renderMapMarkers);
-$('#studentCategory').addEventListener('change',event=>{
-  const category=event.target.value;
-  document.querySelectorAll('.student-card').forEach(card=>card.hidden=category!=='Toutes'&&card.dataset.category!==category);
-});
-document.querySelectorAll('[data-go-category]').forEach(link=>link.addEventListener('click',()=>{
-  const category=link.dataset.goCategory;
-  $('#categoryFilter').value=category;
-  renderActivities();
-}));
-window.addEventListener('hashchange',navigate);
-renderActivities();
-navigate();
+$('#studentCategory').addEventListener('change',e=>document.querySelectorAll('.student-card').forEach(c=>c.hidden=e.target.value!=='Toutes'&&c.dataset.category!==e.target.value));
+document.querySelectorAll('[data-go-category]').forEach(a=>a.addEventListener('click',()=>{$('#categoryFilter').value=a.dataset.goCategory;renderActivities();}));
+$('#loadWeather')?.addEventListener('click',async()=>{const out=$('#weatherText'),btn=$('#loadWeather');btn.disabled=true;btn.textContent='Chargement…';try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=44.8378&longitude=-0.5792&current=temperature_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&timezone=Europe%2FParis');if(!r.ok)throw new Error('Météo indisponible');const d=await r.json(),c=d.current,labels={0:'ciel dégagé',1:'plutôt ensoleillé',2:'partiellement nuageux',3:'couvert',45:'brouillard',48:'brouillard givrant',51:'bruine légère',53:'bruine',55:'bruine forte',61:'pluie faible',63:'pluie',65:'pluie forte',71:'neige faible',73:'neige',75:'neige forte',80:'averses faibles',81:'averses',82:'fortes averses',95:'orage'};out.textContent=`À Bordeaux : ${Math.round(c.temperature_2m)} °C, ${labels[c.weather_code]||'conditions variables'}, ressenti ${Math.round(c.apparent_temperature)} °C. Vent : ${Math.round(c.wind_speed_10m)} km/h. Prévision actuelle fournie par Open-Meteo.`;}catch(e){out.textContent='La météo est momentanément indisponible. Consulte les prévisions sur le site de Météo-France.';}finally{btn.disabled=false;btn.textContent='Actualiser la météo';}});
+// Assistant local de première version : réponses basées uniquement sur les lieux présents dans le catalogue.
+const assistantAnswers=[{keys:['gratuit','sans payer','pas cher'],reply:'Pour une sortie gratuite, tu peux regarder le Miroir d’eau et les quais, le Jardin Public, le Parc Bordelais ou la place Pey-Berland. Consulte leurs informations pratiques avant de partir.'},{keys:['pluie','pleut','mauvais temps','intérieur'],reply:'S’il pleut, regarde plutôt les lieux en intérieur du catalogue : le CAPC, le Musée d’Aquitaine ou la Base sous-marine / Bassins des Lumières. Vérifie les expositions et horaires du jour.'},{keys:['ami','amis','copain','copains','groupe'],reply:'Pour une sortie entre amis, tu peux envisager Darwin, les quais ou une visite culturelle au CAPC. Si tu me précises ton budget et le type d’ambiance, je pourrai mieux t’orienter.'},{keys:['étudiant','etudiant','réduction','reduction'],reply:'Consulte la rubrique Étudiants de SORTIR+. Pour le moment, les offres sont des catégories à compléter : aucune réduction n’est annoncée comme confirmée tant que ses conditions n’ont pas été vérifiées.'},{keys:['famille','enfant','enfants'],reply:'Pour une sortie en famille, le Jardin Public, le Parc Bordelais et les quais sont des pistes accessibles en extérieur. Vérifie les équipements et conditions d’accueil selon l’âge des enfants.'},{keys:['sport','bouger'],reply:'Dans le catalogue actuel, la Patinoire de Bordeaux Mériadeck est une piste sportive. Vérifie les séances publiques et tarifs avant de te déplacer.'}];
+function addMessage(text,who){const el=document.createElement('div');el.className='assistant-msg '+who;el.textContent=text;$('#assistantMessages').appendChild(el);$('#assistantMessages').scrollTop=$('#assistantMessages').scrollHeight;}
+function assistantReply(q){const t=q.toLocaleLowerCase('fr');const hit=assistantAnswers.find(x=>x.keys.some(k=>t.includes(k)));if(hit)return hit.reply;const found=activities.filter(x=>t.split(/\s+/).some(w=>w.length>3&&(x.name+' '+x.category+' '+x.place).toLocaleLowerCase('fr').includes(w)));if(found.length)return `Voici une piste dans le guide : ${found.slice(0,3).map(x=>x.name+' ('+x.place+')').join(', ')}. Tu peux les retrouver dans Activités ou sur la carte. Vérifie les horaires et tarifs auprès des lieux.`;return 'Je peux déjà aider avec les lieux répertoriés dans SORTIR+. Essaie de préciser ton budget, si tu préfères une activité en intérieur ou extérieur, ou si tu cherches une sortie gratuite, culturelle, sportive ou en famille. Cet assistant local n’est pas encore connecté à un modèle d’IA externe.';}
+function openAssistant(open){$('#assistantPanel').hidden=!open;$('#assistantToggle').setAttribute('aria-expanded',String(open));if(open)$('#assistantInput').focus();}
+$('#assistantToggle').addEventListener('click',()=>openAssistant($('#assistantPanel').hidden));$('#assistantClose').addEventListener('click',()=>openAssistant(false));
+$('#assistantForm').addEventListener('submit',e=>{e.preventDefault();const input=$('#assistantInput'),q=input.value.trim();if(!q)return;addMessage(q,'user');input.value='';setTimeout(()=>addMessage(assistantReply(q),'bot'),180);});
+document.querySelectorAll('.assistant-suggestions button').forEach(b=>b.addEventListener('click',()=>{$('#assistantInput').value=b.textContent;$('#assistantForm').requestSubmit();}));
+window.addEventListener('hashchange',navigate);renderActivities();navigate();

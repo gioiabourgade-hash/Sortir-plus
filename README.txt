@@ -24,3 +24,10 @@ INSTALLATION GITHUB PAGES
 4. Commit changes puis attends le déploiement GitHub Pages.
 
 La structure reste composée de sections sur une seule page : les liens utilisent les ancres #accueil, #activites, #carte, #evenements, #etudiants et #decouvrir.
+
+
+VERSION 5 – MISE EN AVANT DE BORDEAUX
+Le titre de la page d’accueil met maintenant BORDEAUX en grand, avec la mention visible « BORDEAUX · MÉTROPOLE · GIRONDE ». Les titres des rubriques rappellent également clairement le territoire couvert. La direction artistique minimaliste bleu nuit, beige et caramel est conservée.
+
+ASSISTANT IA – NOTE
+Une véritable IA conversationnelle pourra être ajoutée dans une prochaine étape. Comme le site est hébergé en statique sur GitHub Pages, il faudra un petit service serveur sécurisé pour appeler le modèle IA : la clé secrète ne doit jamais être placée dans les fichiers HTML ou JavaScript publics. L’assistant devra répondre à partir des fiches SORTIR+ et de sources locales vérifiées, signaler quand une information est incertaine et proposer les liens officiels.

@@ -37,9 +37,10 @@
   <section class="page active" id="page-accueil">
     <div class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">BORDEAUX & ALENTOURS</p>
-        <h1>La vie se passe <em>dehors.</em></h1>
-        <p class="lead">Toutes les idées pour profiter de Bordeaux et de ses alentours. Explore les activités, repère les événements et trouve ta prochaine sortie.</p>
+        <p class="hero-kicker">LE GUIDE LOCAL DES SORTIES</p>
+        <h1><span class="hero-city">BORDEAUX</span><br><em>et ses alentours.</em></h1>
+        <p class="hero-location">BORDEAUX · MÉTROPOLE · GIRONDE</p>
+        <p class="lead">Toutes les idées pour sortir, découvrir et profiter de Bordeaux et des communes voisines. Activités, événements et bons plans réunis au même endroit.</p>
         <div class="hero-actions">
           <a class="btn btn-light" href="#activites">Explorer les activités</a>
           <a class="text-link" href="#carte">Voir la carte <span aria-hidden="true">→</span></a>
@@ -55,7 +56,7 @@
 
     <div class="wrap section">
       <div class="section-heading">
-        <div><p class="eyebrow dark">SÉLECTION SORTIR+</p><h2>Par où commencer ?</h2></div>
+        <div><p class="eyebrow dark">BORDEAUX ET SA MÉTROPOLE</p><h2>Qu’est-ce qu’on fait à Bordeaux ?</h2></div>
         <a class="text-link dark-link" href="#activites">Toutes les activités →</a>
       </div>
       <div class="category-grid">
@@ -74,25 +75,28 @@
 
   <section class="page wrap section" id="page-activites">
     <p class="eyebrow dark">À TOI DE CHOISIR</p>
-    <h1 class="page-title">Explorer les activités.</h1>
-    <p class="lead dark-lead">Des idées de sorties à Bordeaux et dans les alentours, classées par envie.</p>
+    <p class="eyebrow dark">BORDEAUX · MÉTROPOLE · GIRONDE</p>
+    <h1 class="page-title">Toutes les activités à Bordeaux et autour.</h1>
+    <p class="lead dark-lead">Explore les sorties près de chez toi, dans Bordeaux et les communes voisines.</p>
     <div class="filters">
       <input id="searchInput" type="search" placeholder="Rechercher une activité ou une ville…" aria-label="Rechercher une activité ou une ville">
-      <select id="categoryFilter" aria-label="Filtrer par catégorie">
-        <option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option><option>Famille</option>
-      </select>
+      <select id="categoryFilter" aria-label="Filtrer par catégorie"><option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option><option>Famille</option></select>
+      <select id="budgetFilter" aria-label="Filtrer par budget"><option value="Tous">Tous les budgets</option><option value="Gratuit">Gratuit</option><option value="Petit budget">Petit budget (jusqu'à 15 €)</option><option value="Payant">Payant</option></select>
+      <select id="settingFilter" aria-label="Filtrer par lieu"><option value="Tous">Intérieur et extérieur</option><option value="Intérieur">En intérieur</option><option value="Extérieur">En extérieur</option></select>
+      <button class="filter-favorites" id="showFavorites" type="button" aria-pressed="false">♡ Mes favoris</button>
     </div>
+    <div class="weather-strip"><div><span class="eyebrow dark">SORTIR SELON LE TEMPS</span><h2>La météo à Bordeaux</h2><p id="weatherText">Consulte la météo pour choisir une activité en intérieur ou en extérieur.</p></div><button class="btn btn-dark" id="loadWeather" type="button">Voir la météo</button></div>
     <div class="cards" id="allCards"></div>
     <p class="notice">Les lieux présentés servent de premiers repères. Vérifie les horaires, conditions d'accès et activités proposées auprès des établissements avant de te déplacer.</p>
   </section>
 
   <section class="page wrap section" id="page-carte">
     <p class="eyebrow dark">SE REPÉRER</p>
-    <h1 class="page-title">Bordeaux sur la carte.</h1>
+    <h1 class="page-title">La carte des sorties à Bordeaux.</h1>
     <p class="lead dark-lead">Repère les lieux, explore les environs et ouvre un itinéraire pour préparer ta sortie.</p>
     <div class="map-toolbar">
       <label class="sr-only" for="mapCategory">Filtrer les lieux sur la carte</label>
-      <select id="mapCategory"><option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option></select>
+      <select id="mapCategory"><option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option></select><a class="mini-link" href="https://www.infotbm.com/" target="_blank" rel="noopener">Réseau TBM et transports ↗</a>
       <span class="map-key"><i></i> Lieux à découvrir</span>
     </div>
     <div id="activityMap" class="activity-map" role="application" aria-label="Carte interactive des lieux à découvrir à Bordeaux"></div>
@@ -101,14 +105,14 @@
 
   <section class="page wrap section" id="page-evenements">
     <p class="eyebrow dark">ÇA BOUGE PRÈS DE CHEZ TOI</p>
-    <h1 class="page-title">Les événements.</h1>
+    <h1 class="page-title">Les événements à Bordeaux et alentours.</h1>
     <p class="lead dark-lead">Retrouve ici les événements à venir : festivals, marchés, expositions, animations et rendez-vous locaux.</p>
-    <div class="empty-state"><span class="empty-number">À VENIR</span><h2>L'agenda se prépare.</h2><p>Cette rubrique accueillera une sélection d'événements avec leur date, leur lieu et un lien vers les informations officielles. Aucun événement non vérifié ne sera publié.</p></div>
+    <div class="empty-state"><span class="empty-number">AGENDA LOCAL</span><h2>Les sorties du moment.</h2><p>Pour éviter d'afficher des dates périmées, retrouve les événements actualisés auprès des agendas locaux. SORTIR+ pourra ensuite intégrer une sélection datée et vérifiée.</p><div class="event-links"><a class="btn btn-dark" href="https://quoifaireabordeaux.com/" target="_blank" rel="noopener">Quoi faire à Bordeaux ↗</a><a class="btn btn-outline" href="https://www.bordeaux-tourisme.com/agenda" target="_blank" rel="noopener">Agenda Bordeaux Tourisme ↗</a></div></div>
   </section>
 
   <section class="page wrap section" id="page-etudiants">
     <p class="eyebrow dark">LE COIN DES ÉTUDIANTS</p>
-    <h1 class="page-title">Les bons plans étudiants.</h1>
+    <h1 class="page-title">Les bons plans étudiants à Bordeaux.</h1>
     <p class="lead dark-lead">Des réductions et avantages pour profiter de Bordeaux sans exploser son budget.</p>
     <div class="student-intro"><div><span class="eyebrow dark">MANGER · BOUGER · SORTIR</span><h2>Plus de sorties,<br>moins de dépenses.</h2></div><p>Restaurants, sport, bien-être, culture et loisirs : retrouve les offres accessibles avec une carte étudiante ou un justificatif, lorsque les établissements en proposent.</p></div>
     <div class="filters student-filters">
@@ -127,7 +131,7 @@
 
   <section class="page wrap section" id="page-decouvrir">
     <p class="eyebrow dark">LES IDÉES SORTIR+</p>
-    <h1 class="page-title">À découvrir.</h1>
+    <h1 class="page-title">À découvrir autour de Bordeaux.</h1>
     <p class="lead dark-lead">Des idées de lieux et de quartiers pour regarder Bordeaux autrement.</p>
     <div class="discover-list">
       <article><span>01</span><div><h3>Les quais et le centre historique</h3><p>Une balade pour découvrir les places, les façades et les bords de Garonne.</p></div><a href="https://www.google.com/maps/search/?api=1&query=Quais+de+Bordeaux" target="_blank" rel="noopener">Voir le lieu ↗</a></article>
@@ -137,7 +141,9 @@
   </section>
 </main>
 
-<footer><div class="wrap footer-inner"><a class="brand light-brand" href="#accueil">SORTIR<span>+</span></a><p>Les idées de sorties à Bordeaux et alentours.</p><div><a href="#activites">Activités</a><a href="#carte">Carte</a><a href="#etudiants">Étudiants</a><a href="#decouvrir">À découvrir</a></div><small>Guide de découverte indépendant. Les informations pratiques et offres doivent être vérifiées auprès des lieux concernés. © SORTIR+</small></div></footer>
+<aside class="assistant-launcher" id="assistantLauncher"><button class="assistant-bubble" id="assistantToggle" type="button" aria-label="Ouvrir l'assistant SORTIR+" aria-expanded="false"><span>✳</span><b>Besoin d'idées ?</b></button></aside>
+<section class="assistant-panel" id="assistantPanel" aria-label="Assistant SORTIR+" hidden><div class="assistant-head"><div><strong>Assistant SORTIR+</strong><small>Ton guide pour sortir à Bordeaux</small></div><button id="assistantClose" type="button" aria-label="Fermer">×</button></div><div class="assistant-messages" id="assistantMessages" aria-live="polite"><div class="assistant-msg bot">Bonjour ! Je peux t'aider à trouver une idée de sortie à Bordeaux. Tu cherches plutôt une activité gratuite, en intérieur, en famille ou entre amis ?</div></div><div class="assistant-suggestions"><button type="button">Que faire gratuitement ?</button><button type="button">Sortie quand il pleut</button><button type="button">Idée entre amis</button></div><form id="assistantForm" class="assistant-form"><input id="assistantInput" type="text" maxlength="500" placeholder="Pose ta question…" aria-label="Ta question" required><button type="submit">Envoyer</button></form><p class="assistant-disclaimer">Assistant en version initiale : vérifie les horaires et conditions auprès des lieux. Pour des réponses IA personnalisées, un service IA devra être connecté côté serveur.</p></section>
+<footer><div class="wrap footer-inner"><a class="brand light-brand" href="#accueil">SORTIR<span>+</span></a><p>Le guide des activités et sorties à Bordeaux, dans la métropole et en Gironde.</p><div><a href="#activites">Activités</a><a href="#carte">Carte</a><a href="#etudiants">Étudiants</a><a href="#decouvrir">À découvrir</a></div><small>Guide de découverte indépendant. Les informations pratiques et offres doivent être vérifiées auprès des lieux concernés. © SORTIR+</small></div></footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="script.js"></script>
