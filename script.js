@@ -38,15 +38,31 @@ function fillSelect() {
   $("#activity").innerHTML = activities.map(item => `<option value="${item.id}">${item.name} — ${euro(item.price)} / personne</option>`).join("");
 }
 function navigate() {
-  const route = location.hash.slice(1) || "accueil";
+  const route = (location.hash || "#accueil").slice(1);
   const allowed = ["accueil","activites","reservation","partenaires","infos"];
   const target = allowed.includes(route) ? route : "accueil";
-  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-  $("#page-" + target).classList.add("active");
-  document.querySelectorAll("#mainNav a").forEach(link => link.classList.toggle("selected", link.getAttribute("href") === "#" + target));
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === "page-" + target);
+  });
+  document.querySelectorAll("#mainNav a").forEach(link => {
+    link.classList.toggle("selected", link.getAttribute("href") === "#" + target);
+  });
   $("#mainNav").classList.remove("open");
-  window.scrollTo(0,0);
+  window.scrollTo({top: 0, behavior: "instant"});
 }
+
+// Navigation robuste : fonctionne aussi sur les liens du pied de page
+// et les liens d'action, sans dépendre uniquement de hashchange.
+document.addEventListener("click", event => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link) return;
+  const route = link.getAttribute("href").slice(1);
+  if (["accueil","activites","reservation","partenaires","infos"].includes(route)) {
+    event.preventDefault();
+    if (location.hash === "#" + route) navigate();
+    else location.hash = route;
+  }
+});
 function updateSummary() {
   const item = activities.find(activity => activity.id === $("#activity").value) || activities[0];
   const guests = Number($("#guests").value);
@@ -97,6 +113,7 @@ $("#partnerInterest").addEventListener("click", () => {
     : "Ajoute un nom d'établissement et une courte description de l'activité pour préparer ton exemple.";
 });
 window.addEventListener("hashchange", navigate);
+window.addEventListener("pageshow", navigate);
 renderCards();
 fillSelect();
 updateSummary();

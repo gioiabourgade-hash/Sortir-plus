@@ -31,3 +31,7 @@ REFERENCEMENT GOOGLE (SEO)
 - sitemap.xml indique à Google l'adresse de la page d'accueil.
 - robots.txt autorise l'exploration et indique le sitemap.
 Après mise en ligne, ajoute l'adresse du site dans Google Search Console, vérifie la propriété, soumets sitemap.xml puis demande l'indexation de la page d'accueil. L'indexation n'est pas garantie et peut prendre plusieurs jours ou semaines.
+
+
+CORRECTION NAVIGATION
+Cette version corrige le routage des liens internes : les liens Accueil, Activités, Réserver, Partenaires et Informations changent explicitement de vue. Remplacer index.html, script.js et style.css à la racine du dépôt.
