@@ -1,0 +1,11 @@
+SORTIR+ V15.1 — correctif de synchronisation
+
+1. Le script SQL V15 a déjà été exécuté avec succès : ne pas le relancer pour ce correctif.
+2. Dans supabase-config.js, remplacer COLLER_ICI_CLE_PUBLISHABLE_OU_ANON par la clé PUBLIQUE publishable/anon du projet Supabase.
+3. Ne jamais publier de clé service_role, secret, ni mot de passe dans GitHub.
+4. Envoyer les fichiers décompressés à la racine du dépôt GitHub Pages.
+5. Ouvrir https://gioiabourgade-hash.github.io/sortir-plus/#admin puis se connecter.
+6. Tester : créer une activité, la modifier, puis la supprimer. Le catalogue doit refléter chaque changement.
+
+Ce correctif résout le fait que les activités Supabase supprimées ou modifiées restaient affichées jusqu'au rechargement complet de la page.
+Limites connues : les fiches JSON historiques ne sont pas encore éditables depuis Studio ; les nouveaux points de carte exigent des coordonnées ; la connexion réelle ne peut être vérifiée sans publication et clé publique.
