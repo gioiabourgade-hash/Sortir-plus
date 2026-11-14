@@ -50,7 +50,7 @@
         <p class="hero-note">Des idées locales · Des lieux à découvrir · Un seul endroit</p>
         <div class="hero-prompt"><span>✨ BESOIN D’UNE IDÉE ?</span><strong>Ce soir, on fait quoi ?</strong><p>Un concert, une balade, une expo ou un plan entre amis : trouve ton inspiration en deux clics.</p><div><a href="#evenements">🎟️ Les événements</a><a href="#culture">🍇 Bordeaux autrement</a></div></div>
       </div>
-      <div class="hero-art" aria-label="Composition graphique abstraite SORTIR+">
+      <div class="hero-art" aria-label="Illustration en relief de Bordeaux"><div class="hero-sun"></div><div class="hero-bridge"><i></i><i></i><i></i><i></i></div><div class="hero-river"></div><div class="hero-stamp">BORDEAUX <b>44°50′N</b></div>
         <div class="art-card art-one"><span>01 / EXPLORER</span><b>La ville<br>autrement.</b></div>
         <div class="art-card art-two"><span>02 / PROFITER</span><b>À chacun<br>sa sortie.</b></div>
         <div class="art-orb"></div>
@@ -117,7 +117,7 @@
     <p class="notice">Les événements sont enregistrés dans le catalogue du site et ne se synchronisent pas encore en temps réel. Les horaires, tarifs et réservations peuvent évoluer : vérifie les informations manquantes avant de partir.</p>
   </section>
 
-  <section class="page wrap section" id="page-admin">
+  <section class="page wrap section" id="page-admin"><div class="editor-warning"><strong>🔐 Publication réservée aux personnes autorisées</strong><p>Sur GitHub Pages, une page ne peut pas protéger un mot de passe toute seule. Cet éditeur publie uniquement avec un jeton GitHub autorisé. Ne partage pas ton jeton et ne le saisis que sur ton propre site en HTTPS. Pour une connexion privée par identifiant et mot de passe, il faudra ajouter un service d’authentification externe.</p></div>
     <p class="eyebrow dark">ESPACE ÉDITEUR</p><h1 class="page-title">Gérer les événements</h1>
     <p class="dark-lead">Ajoute, corrige ou supprime les annonces depuis ton navigateur. Pour publier sur GitHub Pages, connecte ton dépôt GitHub : les changements seront enregistrés dans <code>evenements.json</code> et visibles par tous après déploiement.</p>
     <div class="admin-layout"><div class="admin-panel"><h2>Connexion à ton dépôt</h2><label>Propriétaire GitHub<input id="adminOwner" autocomplete="off" placeholder="nom-du-compte"></label><label>Nom du dépôt<input id="adminRepo" autocomplete="off" placeholder="sortir-plus"></label><label>Branche<input id="adminBranch" value="main" autocomplete="off"></label><label>Jeton GitHub (permission Contents : Read and write)<input id="adminToken" type="password" autocomplete="off" placeholder="github_pat_…"></label><p class="admin-hint">Le jeton n'est pas enregistré dans les fichiers du site ni dans le stockage permanent du navigateur. Ne partage jamais ton jeton. Cet espace n'est pas une authentification : seul un jeton autorisé peut publier.</p><button class="btn btn-dark" id="adminLoad" type="button">Charger les événements du dépôt</button></div>
@@ -125,7 +125,7 @@
     <div class="admin-panel"><h2>Annonces en cours d'édition</h2><p class="admin-hint">Tu peux préparer tes changements, puis les publier en une fois.</p><div id="adminList"></div><div class="admin-actions"><button class="btn btn-dark" id="adminPublish" type="button">Publier sur mon site</button><span id="adminMessage" role="status" aria-live="polite"></span></div></div>
   </section>
   <section class="page wrap section" id="page-etudiants">
-    <p class="eyebrow dark">LE COIN DES ÉTUDIANTS</p>
+    <div class="student-showcase"><div class="student-showcase-copy"><p class="eyebrow">LE COIN DES ÉTUDIANTS · BORDEAUX</p><h2>Petit budget.<br><em>Grandes idées.</em></h2><p>Une ville entière à explorer, des découvertes à partager et des bons plans à dénicher.</p><a href="#studentOffers" class="btn btn-light" id="studentExplore">Explorer les idées ↓</a></div><div class="student-visual" aria-hidden="true"><div class="student-disc disc-a"></div><div class="student-disc disc-b"></div><div class="student-ticket"><small>SORTIR+ / CITY PASS</small><strong>BORDEAUX</strong><span>GOOD TIMES · GOOD PLANS</span><b>✳  ✦  ◉</b></div><div class="student-mini">☕<br><small>PAUSE</small></div><div class="student-mini second">🎟️<br><small>SORTIES</small></div></div></div><p class="eyebrow dark">LE COIN DES ÉTUDIANTS</p>
     <h1 class="page-title">Les bons plans étudiants à Bordeaux.</h1>
     <p class="lead dark-lead">Des réductions et avantages pour profiter de Bordeaux sans exploser son budget.</p>
     <div class="student-intro"><div><span class="eyebrow dark">MANGER · BOUGER · SORTIR</span><h2>Plus de sorties,<br>moins de dépenses.</h2></div><p>Restaurants, sport, bien-être, culture et loisirs : retrouve les offres accessibles avec une carte étudiante ou un justificatif, lorsque les établissements en proposent.</p></div>
@@ -156,7 +156,7 @@
   <section class="page wrap section" id="page-culture">
     <p class="eyebrow dark">L'ÂME DE LA VILLE</p><h1 class="page-title">Bordeaux, bien plus qu'une destination.</h1>
     <p class="lead dark-lead">Son vin, sa pierre blonde, ses quartiers et ses traditions : découvre ce qui rend Bordeaux unique.</p>
-    <div class="culture-grid">
+    <div class="section-artline"><span>🍇</span><strong>Une ville, mille histoires.</strong><span>✦</span></div><div class="culture-grid">
       <article><span>🍇</span><h2>La culture du vin</h2><p>À Bordeaux, le vin raconte un territoire : les vignobles du Médoc, de Saint-Émilion, des Graves et d'ailleurs, mais aussi les métiers et savoir-faire qui l'entourent.</p><p>Pour découvrir cet univers, la Cité du Vin propose une approche culturelle accessible aussi aux visiteurs qui ne dégustent pas.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Cit%C3%A9+du+Vin+Bordeaux" target="_blank" rel="noopener">S'y rendre ↗</a></article>
       <article><span>🏛️</span><h2>Patrimoine & architecture</h2><p>Les façades de pierre, la place de la Bourse, le Grand-Théâtre et les quais racontent l'histoire de Bordeaux. Une promenade à pied suffit pour en découvrir les contrastes.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Place+de+la+Bourse+Bordeaux" target="_blank" rel="noopener">Commencer la balade ↗</a></article>
       <article><span>🥐</span><h2>Saveurs bordelaises</h2><p>Cannelés, marchés, produits du Sud-Ouest et tables conviviales : une autre façon de découvrir la ville passe par ses saveurs et ses artisans.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=March%C3%A9+des+Capucins+Bordeaux" target="_blank" rel="noopener">Découvrir les Capucins ↗</a></article>
