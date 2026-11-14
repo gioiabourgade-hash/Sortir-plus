@@ -1,0 +1,1 @@
+SORTIR+ V13 — Copie complète de la V12 + cartes événements recto/verso interactives et illustration Bordeaux en relief animée. Décompresser à la racine du dépôt GitHub Pages. Les catalogues et fonctions de la V12 sont conservés. Tester sur le site publié. Les animations respectent prefers-reduced-motion.
