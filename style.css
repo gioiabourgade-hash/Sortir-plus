@@ -100,3 +100,9 @@ body{background:var(--cream)}.topbar{box-shadow:0 3px 18px #173e3217}.page.activ
 .event-back .flip-trigger{background:#345d4b;color:#fff;box-shadow:4px 5px 0 #c98998}
 .event-flip-card,.event-flip-inner,.event-face{min-width:0}
 .event-face{overflow-x:hidden;overflow-y:auto;overflow-wrap:anywhere}
+
+/* V13.2: contraste garanti sur le verso des fiches, priorite maximale */
+.event-flip-card .event-flip-inner .event-face.event-back {background:#f4e4e7 !important;color:#17241d !important;}
+.event-flip-card .event-face.event-back h3,.event-flip-card .event-face.event-back p,.event-flip-card .event-face.event-back strong,.event-flip-card .event-face.event-back .event-details,.event-flip-card .event-face.event-back .event-details * {color:#17241d !important;text-shadow:none !important;opacity:1 !important;}
+.event-flip-card .event-face.event-back .event-details {background:#fff9fa !important;border:1px solid #d4aeb9 !important;}
+.event-flip-card .event-face.event-back .tag,.event-flip-card .event-face.event-back .mini-link,.event-flip-card .event-face.event-back .flip-trigger {background:#345d4b !important;color:#fff !important;}
