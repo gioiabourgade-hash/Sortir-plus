@@ -85,7 +85,7 @@
       <select id="settingFilter" aria-label="Filtrer par lieu"><option value="Tous">Intérieur et extérieur</option><option value="Intérieur">En intérieur</option><option value="Extérieur">En extérieur</option></select>
       <button class="filter-favorites" id="showFavorites" type="button" aria-pressed="false">♡ Mes favoris</button>
     </div>
-    <div class="weather-strip"><div><span class="eyebrow dark">SORTIR SELON LE TEMPS</span><h2>La météo à Bordeaux</h2><p id="weatherText">Consulte la météo pour choisir une activité en intérieur ou en extérieur.</p></div><button class="btn btn-dark" id="loadWeather" type="button">Voir la météo</button></div>
+    <div class="weather-strip"><div class="weather-icon" id="weatherIcon" aria-hidden="true">☁️</div><div><span class="eyebrow dark">SORTIR SELON LE TEMPS</span><h2>La météo à Bordeaux</h2><p id="weatherText">Chargement automatique de la météo…</p></div><small id="weatherUpdated" aria-live="polite"></small></div>
     <div class="cards" id="allCards"></div>
     <p class="notice">Les lieux présentés servent de premiers repères. Vérifie les horaires, conditions d'accès et activités proposées auprès des établissements avant de te déplacer.</p>
   </section>
@@ -107,7 +107,10 @@
     <p class="eyebrow dark">ÇA BOUGE PRÈS DE CHEZ TOI</p>
     <h1 class="page-title">Les événements à Bordeaux et alentours.</h1>
     <p class="lead dark-lead">Retrouve ici les événements à venir : festivals, marchés, expositions, animations et rendez-vous locaux.</p>
-    <div class="empty-state"><span class="empty-number">AGENDA LOCAL</span><h2>Les sorties du moment.</h2><p>Pour éviter d'afficher des dates périmées, retrouve les événements actualisés auprès des agendas locaux. SORTIR+ pourra ensuite intégrer une sélection datée et vérifiée.</p><div class="event-links"><a class="btn btn-dark" href="https://quoifaireabordeaux.com/" target="_blank" rel="noopener">Quoi faire à Bordeaux ↗</a><a class="btn btn-outline" href="https://www.bordeaux-tourisme.com/agenda" target="_blank" rel="noopener">Agenda Bordeaux Tourisme ↗</a></div></div>
+    <div class="event-toolbar"><label for="eventCategory">Catégorie</label><select id="eventCategory"><option value="Toutes">Toutes</option><option>Festival</option><option>Concert</option><option>Exposition</option><option>Famille</option><option>Marché</option></select></div>
+    <p class="event-status" id="eventStatus" aria-live="polite">Sélection vérifiée le 14 novembre 2026 · Les événements passés sont masqués automatiquement.</p>
+    <div id="eventCards" class="cards event-cards"></div>
+    <p class="notice">Programmation éditoriale issue de l'agenda de Bordeaux Tourisme, et non synchronisée en temps réel. Vérifie les changements d'horaires et les tarifs auprès de l'organisateur. Les nouvelles manifestations nécessitent une mise à jour du catalogue.</p>
   </section>
 
   <section class="page wrap section" id="page-etudiants">

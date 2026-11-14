@@ -1,0 +1,101 @@
+[
+  {
+    "title": "FIFH — Festival International du Film d’Histoire",
+    "start": "2026-11-17",
+    "end": "2026-11-22",
+    "category": "Festival",
+    "place": "Métropole bordelaise",
+    "description": "Festival de cinéma consacré à l’histoire.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "PLK en concert",
+    "start": "2026-11-14",
+    "end": "2026-11-14",
+    "category": "Concert",
+    "place": "Arkéa Arena",
+    "description": "Concert à l’Arkéa Arena.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Disney en concert",
+    "start": "2026-11-21",
+    "end": "2026-11-21",
+    "category": "Concert",
+    "place": "Arkéa Arena",
+    "description": "Spectacle musical autour de l’univers Disney.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Anatomik Park",
+    "start": "2026-11-12",
+    "end": "2027-03-21",
+    "category": "Famille",
+    "place": "Cap Sciences",
+    "description": "Expérience familiale à Cap Sciences.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Exposition « Crotte ! Que fait le microbiote ? »",
+    "start": "2026-11-12",
+    "end": "2027-08-29",
+    "category": "Exposition",
+    "place": "Cap Sciences",
+    "description": "Exposition consacrée au microbiote.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Exposition « Pollen »",
+    "start": "2026-11-13",
+    "end": "2027-06-20",
+    "category": "Exposition",
+    "place": "CAPC Bordeaux",
+    "description": "Exposition d’art contemporain.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Marché de Noël de Bordeaux",
+    "start": "2026-11-27",
+    "end": "2026-12-27",
+    "category": "Marché",
+    "place": "Bordeaux",
+    "description": "Marché de Noël saisonnier.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Festival Les Nuits Magiques",
+    "start": "2026-12-09",
+    "end": "2026-12-09",
+    "category": "Festival",
+    "place": "Métropole bordelaise",
+    "description": "Rendez-vous du festival Les Nuits Magiques.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Le cirque Arlette Gruss à Bordeaux",
+    "start": "2026-12-18",
+    "end": "2027-01-24",
+    "category": "Famille",
+    "place": "Bordeaux",
+    "description": "Spectacle de cirque pour petits et grands.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Les châteaux de Sauternes et Barsac ouvrent leurs portes",
+    "start": "2026-11-14",
+    "end": "2026-11-15",
+    "category": "Festival",
+    "place": "Sauternes et Barsac",
+    "description": "Week-end de découverte des châteaux viticoles.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Foire à la brocante d’automne",
+    "start": "2026-11-20",
+    "end": "2026-12-06",
+    "category": "Marché",
+    "place": "Bordeaux",
+    "description": "Foire à la brocante automnale.",
+    "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  }
+]
