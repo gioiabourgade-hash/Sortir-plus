@@ -107,3 +107,37 @@ document.addEventListener('click', e => {
  const open=card.querySelector('.event-front .flip-trigger');open.setAttribute('aria-expanded',String(flipped));
  (flipped?back:front).querySelector('.flip-trigger').focus({preventScroll:true});
 });
+
+
+// V14 — Recommandations locales : classement explicable à partir du catalogue, sans prétendre à une IA distante.
+(function(){
+ const form=document.getElementById('smartFinder'),results=document.getElementById('smartResults');
+ if(!form||!results)return;
+ const escapeHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ form.addEventListener('submit',e=>{
+   e.preventDefault();
+   const company=document.getElementById('smartCompany').value,budget=document.getElementById('smartBudget').value,mood=document.getElementById('smartMood').value,setting=document.getElementById('smartSetting').value;
+   const candidates=(typeof activities!=='undefined'?activities:[]).map((a,i)=>{
+     const category=String(a.category||'').toLowerCase(),description=String(a.description||'').toLowerCase(),label=(category+' '+description+' '+(a.name||'')).toLowerCase();
+     let score=0;
+     if(mood!=='tous'){if(category.includes(mood))score+=6;else score-=4;}
+     if(setting!=='tous'){if(a.setting===setting)score+=4;else score-=5;}
+     if(budget!=='tous'){const b=String(a.budget||'').toLowerCase();if(budget==='gratuit'&&b==='gratuit')score+=6;else if(budget==='petit'&&(b.includes('petit')||b==='gratuit'))score+=6;else if(budget==='payant'&&b==='payant')score+=6;else score-=6;}
+     if(company==='famille'&&/famille|enfant|parc|jardin|musée/.test(label))score+=3;
+     if(company==='amis'&&/loisir|sport|concert|darwin|quai/.test(label))score+=3;
+     if(company==='solo'&&/culture|nature|musée|balade/.test(label))score+=3;
+     return {a,i,score};
+   }).filter(x=>x.score>=0).sort((a,b)=>b.score-a.score||a.i-b.i).slice(0,3);
+   results.replaceChildren();
+   if(!candidates.length){const p=document.createElement('p');p.textContent='Aucune activité ne correspond exactement. Essaie un autre budget ou une autre ambiance.';results.append(p);return;}
+   candidates.forEach(({a})=>{
+     const card=document.createElement('article');card.className='v14-result';
+     const tag=document.createElement('small');tag.textContent=a.category||'Sortie';
+     const title=document.createElement('strong');title.textContent=a.name||'Activité';
+     const info=document.createElement('p');info.textContent=(a.place||'Bordeaux')+' · '+(a.budget||'Budget à vérifier');
+     const desc=document.createElement('p');desc.textContent=a.description||'Retrouve les informations dans le guide.';
+     const link=document.createElement('a');link.href='#activites';link.textContent='Explorer les activités ↗';
+     card.append(tag,title,info,desc,link);results.append(card);
+   });
+ });
+})();
