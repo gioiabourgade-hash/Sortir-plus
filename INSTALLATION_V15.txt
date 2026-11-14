@@ -1,0 +1,15 @@
+SORTIR+ V15 — INSTALLATION (GitHub Pages + Supabase)
+
+1. Dans Supabase > SQL Editor, ouvrir une nouvelle requête, coller TOUT le contenu de supabase_setup.sql puis Run. Ne pas relancer les anciens scripts CREATE TABLE profiles.
+2. Dans Supabase > Project Settings > API Keys, copier UNIQUEMENT la clé publishable (sb_publishable_...) ou la clé anon publique (legacy). NE JAMAIS utiliser service_role, secret key, mot de passe de base de données.
+3. Dans supabase-config.js, remplacer COLLER_ICI_CLE_PUBLISHABLE_OU_ANON par cette clé publique. Vérifier l'URL du projet.
+4. Dans Supabase > Authentication > URL Configuration : conserver l'URL du site GitHub Pages, déjà configurée.
+5. Vérifier que votre utilisateur peut se connecter avec e-mail et MOT DE PASSE dans Supabase Auth. Une invitation par e-mail ne garantit pas que vous avez déjà défini un mot de passe. Si nécessaire, définir le mot de passe par un flux sécurisé de récupération/confirmation. Ne pas mettre de mot de passe dans le dépôt.
+6. Décompresser et envoyer les fichiers à la RACINE du dépôt GitHub Pages, commit sur main. NE PAS déposer le ZIP comme fichier unique. Le fichier SQL peut être conservé localement plutôt que publié.
+7. Après publication, ouvrir https://gioiabourgade-hash.github.io/sortir-plus/#admin puis se connecter.
+
+IMPORTANT : le tableau de bord et la base de données ne sont pas encore configurés dans VOTRE Supabase tant que l'étape 1 n'a pas été exécutée. Aucun test de connexion réel n'a été effectué.
+Les événements historiques evenements.json et les catalogues JSON V14 restent affichés en lecture seule comme base initiale. Pour les modifier dans Studio, recréer ou importer ces fiches dans Supabase ; la V15 n'effectue pas de migration automatique des anciens JSON. Les nouvelles annonces sont stockées dans Supabase et apparaissent sans commit GitHub. Le catalogue public se resynchronise environ toutes les 60 secondes sur une page ouverte.
+RLS protège les données côté serveur : seuls admin/partner peuvent créer des fiches ; les partenaires ne peuvent publier eux-mêmes. L'interface n'est pas un secret : la sécurité est dans les politiques Supabase.
+Les activités créées via Studio ne disposent pas de coordonnées géographiques et ne s'affichent donc pas comme points sur la carte. Les événements dont le lieu n'est pas dans le dictionnaire de géocodage V14 n'apparaissent pas sur la carte. Cette limite reste à corriger dans une version ultérieure.
+Les avis existants ne doivent pas être présentés comme des avis authentiques si leur origine n'est pas vérifiée.
