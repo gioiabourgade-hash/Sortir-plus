@@ -12,7 +12,7 @@
   <meta property="og:title" content="SORTIR+ — Que faire à Bordeaux et alentours ?">
   <meta property="og:description" content="Activités, sorties, événements et bons plans étudiants à Bordeaux et dans la métropole.">
   <meta property="og:url" content="https://gioiabourgade-hash.github.io/Sortir-plus/">
-  <meta name="theme-color" content="#172d35">
+  <meta name="theme-color" content="#173e32">
   <title>SORTIR+ | Activités et sorties à Bordeaux et alentours</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,8 @@
     <a href="#activites">Activités</a>
     <a href="#carte">Carte</a>
     <a href="#evenements">Événements</a>
+    <a href="#culture">Culture bordelaise</a>
+    <a href="#histoire">Notre histoire</a>
     <a class="nav-cta" href="#etudiants">Étudiants</a>
   </nav>
 </header>
@@ -78,15 +80,16 @@
     <p class="eyebrow dark">BORDEAUX · MÉTROPOLE · GIRONDE</p>
     <h1 class="page-title">Toutes les activités à Bordeaux et autour.</h1>
     <p class="lead dark-lead">Explore les sorties près de chez toi, dans Bordeaux et les communes voisines.</p>
+    <div class="filter-intro"><strong>Quelle sortie te ferait plaisir ?</strong><span>Choisis ce qui te plaît, les résultats changent immédiatement.</span></div>
     <div class="filters">
       <input id="searchInput" type="search" placeholder="Rechercher une activité ou une ville…" aria-label="Rechercher une activité ou une ville">
       <select id="categoryFilter" aria-label="Filtrer par catégorie"><option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option><option>Famille</option></select>
       <select id="budgetFilter" aria-label="Filtrer par budget"><option value="Tous">Tous les budgets</option><option value="Gratuit">Gratuit</option><option value="Petit budget">Petit budget (jusqu'à 15 €)</option><option value="Payant">Payant</option></select>
       <select id="settingFilter" aria-label="Filtrer par lieu"><option value="Tous">Intérieur et extérieur</option><option value="Intérieur">En intérieur</option><option value="Extérieur">En extérieur</option></select>
-      <button class="filter-favorites" id="showFavorites" type="button" aria-pressed="false">♡ Mes favoris</button>
+      <button class="filter-favorites" id="showFavorites" type="button" aria-pressed="false">♡ Mes favoris</button><button id="resetFilters" class="reset-filters" type="button">↺ Effacer les filtres</button>
     </div>
     <div class="weather-strip"><div class="weather-icon" id="weatherIcon" aria-hidden="true">☁️</div><div><span class="eyebrow dark">SORTIR SELON LE TEMPS</span><h2>La météo à Bordeaux</h2><p id="weatherText">Chargement automatique de la météo…</p></div><small id="weatherUpdated" aria-live="polite"></small></div>
-    <div class="cards" id="allCards"></div>
+    <p class="result-count" id="activityCount" aria-live="polite"></p><div class="cards" id="allCards"></div>
     <p class="notice">Les lieux présentés servent de premiers repères. Vérifie les horaires, conditions d'accès et activités proposées auprès des établissements avant de te déplacer.</p>
   </section>
 
@@ -96,10 +99,10 @@
     <p class="lead dark-lead">Repère les lieux, explore les environs et ouvre un itinéraire pour préparer ta sortie.</p>
     <div class="map-toolbar">
       <label class="sr-only" for="mapCategory">Filtrer les lieux sur la carte</label>
-      <select id="mapCategory"><option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option></select><a class="mini-link" href="https://www.infotbm.com/" target="_blank" rel="noopener">Réseau TBM et transports ↗</a>
-      <span class="map-key"><i></i> Lieux à découvrir</span>
+      <select id="mapCategory"><option value="Toutes">Toutes les catégories</option><option>Culture</option><option>Sport</option><option>Nature</option><option>Loisirs</option><option value="Événements">Événements uniquement</option></select><a class="mini-link" href="https://www.infotbm.com/" target="_blank" rel="noopener">Réseau TBM et transports ↗</a>
+      
     </div>
-    <div id="activityMap" class="activity-map" role="application" aria-label="Carte interactive des lieux à découvrir à Bordeaux"></div>
+    <div id="activityMap" class="activity-map" role="application" aria-label="Carte interactive des activités et événements à Bordeaux"></div><div class="map-legend"><span><i class="legend-dot activity-dot"></i> Activités et lieux</span><span><i class="legend-dot event-dot"></i> Événements à venir</span></div>
     <p class="notice">La carte utilise OpenStreetMap. Les marqueurs sont une première sélection de lieux publics et de repères bordelais ; le catalogue sera enrichi avec les activités et adresses vérifiées.</p>
   </section>
 
@@ -108,9 +111,9 @@
     <h1 class="page-title">Les événements à Bordeaux et alentours.</h1>
     <p class="lead dark-lead">Retrouve ici les événements à venir : festivals, marchés, expositions, animations et rendez-vous locaux.</p>
     <div class="event-toolbar"><label for="eventCategory">Catégorie</label><select id="eventCategory"><option value="Toutes">Toutes</option><option>Festival</option><option>Concert</option><option>Exposition</option><option>Famille</option><option>Marché</option></select></div>
-    <p class="event-status" id="eventStatus" aria-live="polite">Sélection vérifiée le 14 novembre 2026 · Les événements passés sont masqués automatiquement.</p>
+    <p class="event-status" id="eventStatus" aria-live="polite">Sélection éditoriale · Les événements passés sont masqués automatiquement. Les informations pratiques non confirmées sont signalées.</p>
     <div id="eventCards" class="cards event-cards"></div>
-    <p class="notice">Programmation éditoriale issue de l'agenda de Bordeaux Tourisme, et non synchronisée en temps réel. Vérifie les changements d'horaires et les tarifs auprès de l'organisateur. Les nouvelles manifestations nécessitent une mise à jour du catalogue.</p>
+    <p class="notice">Les événements sont enregistrés dans le catalogue du site et ne se synchronisent pas encore en temps réel. Les horaires, tarifs et réservations peuvent évoluer : vérifie les informations manquantes avant de partir.</p>
   </section>
 
   <section class="page wrap section" id="page-etudiants">
@@ -142,11 +145,30 @@
       <article><span>03</span><div><h3>Les lieux culturels</h3><p>Musées, lieux d'exposition et espaces de création à explorer.</p></div><a href="https://www.google.com/maps/search/?api=1&query=Mus%C3%A9es+Bordeaux" target="_blank" rel="noopener">Voir les lieux ↗</a></article>
     </div>
   </section>
+  <section class="page wrap section" id="page-culture">
+    <p class="eyebrow dark">L'ÂME DE LA VILLE</p><h1 class="page-title">Bordeaux, bien plus qu'une destination.</h1>
+    <p class="lead dark-lead">Son vin, sa pierre blonde, ses quartiers et ses traditions : découvre ce qui rend Bordeaux unique.</p>
+    <div class="culture-grid">
+      <article><span>🍇</span><h2>La culture du vin</h2><p>À Bordeaux, le vin raconte un territoire : les vignobles du Médoc, de Saint-Émilion, des Graves et d'ailleurs, mais aussi les métiers et savoir-faire qui l'entourent.</p><p>Pour découvrir cet univers, la Cité du Vin propose une approche culturelle accessible aussi aux visiteurs qui ne dégustent pas.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Cit%C3%A9+du+Vin+Bordeaux" target="_blank" rel="noopener">S'y rendre ↗</a></article>
+      <article><span>🏛️</span><h2>Patrimoine & architecture</h2><p>Les façades de pierre, la place de la Bourse, le Grand-Théâtre et les quais racontent l'histoire de Bordeaux. Une promenade à pied suffit pour en découvrir les contrastes.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=Place+de+la+Bourse+Bordeaux" target="_blank" rel="noopener">Commencer la balade ↗</a></article>
+      <article><span>🥐</span><h2>Saveurs bordelaises</h2><p>Cannelés, marchés, produits du Sud-Ouest et tables conviviales : une autre façon de découvrir la ville passe par ses saveurs et ses artisans.</p><a href="https://www.google.com/maps/search/?api=1&amp;query=March%C3%A9+des+Capucins+Bordeaux" target="_blank" rel="noopener">Découvrir les Capucins ↗</a></article>
+      <article><span>🎭</span><h2>Une ville vivante</h2><p>Entre les Bassins à flot, les Chartrons, Saint-Michel et la rive droite, Bordeaux accueille des expositions, concerts, rencontres et initiatives culturelles.</p><a href="#evenements">Voir les événements ↗</a></article>
+    </div>
+  </section>
+  <section class="page wrap section" id="page-histoire">
+    <p class="eyebrow dark">POURQUOI SORTIR+ ?</p><h1 class="page-title">Tout a commencé par une question.</h1>
+    <div class="story-panel"><p class="story-quote">« On fait quoi ce soir ? Ou cet après-midi ? »</p>
+    <p>Avec mes potes, on se posait souvent cette question. On avait envie de sortir, de découvrir quelque chose, de passer un bon moment… mais on ne savait jamais vraiment où chercher. Les idées étaient éparpillées entre plusieurs sites, agendas et réseaux sociaux.</p>
+    <p>Alors j'ai beaucoup réfléchi à ce problème. Et si on pouvait retrouver au même endroit les activités, les événements, les lieux à découvrir et les informations utiles pour organiser une sortie ?</p>
+    <p>C'est comme ça qu'est née l'idée de <strong>SORTIR+</strong> : un guide simple, clair et vivant, pensé pour aider à choisir une sortie à Bordeaux et autour, sans perdre du temps à chercher.</p>
+    <p><strong>Notre objectif :</strong> moins de recherches, plus de découvertes et plus de moments partagés.</p>
+    <a class="btn btn-dark" href="#activites">Trouver ma prochaine sortie</a></div>
+  </section>
 </main>
 
 <aside class="assistant-launcher" id="assistantLauncher"><button class="assistant-bubble" id="assistantToggle" type="button" aria-label="Ouvrir l'assistant SORTIR+" aria-expanded="false"><span>✳</span><b>Besoin d'idées ?</b></button></aside>
 <section class="assistant-panel" id="assistantPanel" aria-label="Assistant SORTIR+" hidden><div class="assistant-head"><div><strong>Assistant SORTIR+</strong><small>Ton guide pour sortir à Bordeaux</small></div><button id="assistantClose" type="button" aria-label="Fermer">×</button></div><div class="assistant-messages" id="assistantMessages" aria-live="polite"><div class="assistant-msg bot">Bonjour ! Je peux t'aider à trouver une idée de sortie à Bordeaux. Tu cherches plutôt une activité gratuite, en intérieur, en famille ou entre amis ?</div></div><div class="assistant-suggestions"><button type="button">Que faire gratuitement ?</button><button type="button">Sortie quand il pleut</button><button type="button">Idée entre amis</button></div><form id="assistantForm" class="assistant-form"><input id="assistantInput" type="text" maxlength="500" placeholder="Pose ta question…" aria-label="Ta question" required><button type="submit">Envoyer</button></form><p class="assistant-disclaimer">Assistant en version initiale : vérifie les horaires et conditions auprès des lieux. Pour des réponses IA personnalisées, un service IA devra être connecté côté serveur.</p></section>
-<footer><div class="wrap footer-inner"><a class="brand light-brand" href="#accueil">SORTIR<span>+</span></a><p>Le guide des activités et sorties à Bordeaux, dans la métropole et en Gironde.</p><div><a href="#activites">Activités</a><a href="#carte">Carte</a><a href="#etudiants">Étudiants</a><a href="#decouvrir">À découvrir</a></div><small>Guide de découverte indépendant. Les informations pratiques et offres doivent être vérifiées auprès des lieux concernés. © SORTIR+</small></div></footer>
+<footer><div class="wrap footer-inner"><a class="brand light-brand" href="#accueil">SORTIR<span>+</span></a><p>Le guide des activités et sorties à Bordeaux, dans la métropole et en Gironde.</p><div><a href="#activites">Activités</a><a href="#carte">Carte</a><a href="#etudiants">Étudiants</a><a href="#decouvrir">À découvrir</a><a href="#culture">Culture bordelaise</a><a href="#histoire">Notre histoire</a></div><small>Guide de découverte indépendant. Les informations pratiques et offres doivent être vérifiées auprès des lieux concernés. © SORTIR+</small></div></footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="script.js"></script>
