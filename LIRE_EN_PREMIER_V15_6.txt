@@ -1,0 +1,10 @@
+SORTIR+ V15.6 — Ajustements de textes uniquement
+
+- Accueil : BORDEAUX / 3D devient BORDEAUX.
+- Administrateur : Gestion des annonces.
+- Partenaire : Mes annonces.
+- Types et statuts affichés en français.
+
+Aucune modification SQL nécessaire : ne relancez pas le script Supabase.
+Publier les fichiers extraits à la racine du dépôt GitHub Pages, puis attendre le déploiement.
+Les données et autorisations Supabase restent inchangées.
