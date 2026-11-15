@@ -134,3 +134,23 @@ body{background:var(--cream)}.topbar{box-shadow:0 3px 18px #173e3217}.page.activ
 .studio-consent{display:flex!important;align-items:flex-start;gap:10px;line-height:1.5}.studio-consent input{width:auto!important;flex:0 0 auto;margin-top:5px}.studio-text-button{cursor:pointer}#studioSignupPanel{max-width:650px}#studioSignupPanel form{display:grid;gap:12px}#studioPhoto{padding:10px;background:#fff;border-radius:8px}
 
 .sortir-listing-photo{display:block;width:100%;height:185px;object-fit:cover;border-radius:12px;margin-bottom:14px}
+
+/* SORTIR+ V16 — Bordeaux immersif: progressive enhancement */
+.immersive-toggle{position:fixed;z-index:990;right:22px;bottom:88px;background:#214c3b;color:#fff;border:1px solid #d9c0c6;border-radius:999px;padding:12px 18px;box-shadow:0 12px 30px #173e3240;font:700 13px "DM Sans",sans-serif;cursor:pointer}
+.immersive-toggle:hover{background:#673047}.immersive-toggle:focus-visible{outline:3px solid #b97187;outline-offset:3px}
+body.immersive-mode{scroll-behavior:smooth;scroll-snap-type:y proximity}
+body.immersive-mode .page{display:block!important;min-height:75vh;scroll-margin-top:76px;scroll-snap-align:start;animation:none!important}
+body.immersive-mode .page .page-title{animation:none!important}
+body.immersive-mode #page-accueil{min-height:100vh}
+body.immersive-mode .page:not(#page-accueil){border-top:1px solid #e7d7d6}
+body.immersive-mode .topbar{backdrop-filter:blur(16px);background:#fffef9ee}
+.wine-transition{pointer-events:none;position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;background:linear-gradient(135deg,#f7f0e9ee,#f2dce3ed);overflow:hidden}
+.wine-transition.playing{visibility:visible;animation:wineFade .72s ease-in-out both}
+.wine-transition .wine-bottle{font-size:clamp(85px,16vw,180px);z-index:2;transform:rotate(-24deg);filter:drop-shadow(12px 16px 9px #45243133)}
+.wine-transition .wine-ribbon{position:absolute;width:170vw;height:40vh;left:-30vw;top:53%;background:linear-gradient(120deg,#63233b,#a65773,#6b2d48);border-radius:50%;transform:translateX(-110%) rotate(-15deg)}
+.wine-transition.playing .wine-ribbon{animation:wineSweep .72s ease-in-out both}
+.wine-transition span{position:absolute;bottom:20%;color:#214c3b;font-weight:800;letter-spacing:.2em;font-size:clamp(12px,2vw,18px)}
+@keyframes wineFade{0%,100%{opacity:0}18%,72%{opacity:1}}
+@keyframes wineSweep{0%{transform:translateX(-110%) rotate(-15deg)}100%{transform:translateX(120%) rotate(-15deg)}}
+@media(max-width:760px){.immersive-toggle{right:12px;bottom:78px;padding:10px 13px;font-size:12px}body.immersive-mode .page{scroll-margin-top:66px}}
+@media(prefers-reduced-motion:reduce){body.immersive-mode{scroll-behavior:auto;scroll-snap-type:none}.wine-transition{display:none!important}}

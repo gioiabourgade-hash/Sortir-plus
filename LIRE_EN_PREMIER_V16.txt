@@ -1,0 +1,9 @@
+SORTIR+ V16 — Bordeaux immersif
+
+Cette version ajoute un bouton « Parcours immersif » permettant de faire défiler les rubriques verticalement et de suivre la rubrique active dans le menu. Elle ajoute une courte transition graphique inspirée du vin lors des changements de rubrique en mode classique (illustration stylisée, pas de rendu 3D photoréaliste).
+
+Les fichiers Supabase, le SQL et la logique de connexion professionnelle sont inchangés.
+
+Installation : extraire ce ZIP et remplacer les fichiers à la racine du dépôt GitHub, puis Commit changes. Aucun SQL à exécuter.
+
+ATTENTION : les effets ont été vérifiés statiquement (syntaxe JavaScript, archive) mais pas testés en conditions réelles sur votre site. Tester l'accueil, la navigation, la carte, l'espace pro et les annonces avant lancement public.
