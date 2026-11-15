@@ -160,3 +160,14 @@ body{background:var(--cream)}.topbar{box-shadow:0 3px 18px #173e3217}.page.activ
 @keyframes wineWave{0%,38%{opacity:0}53%,80%{opacity:.8}100%{opacity:0}}
 @media(max-width:600px){.wine-transition__stage{width:100vw;height:100dvh}.wine-transition__illustration{max-height:67vh}.wine-transition__brand{margin-top:-12px}}
 @media(prefers-reduced-motion:reduce){.wine-transition{display:none!important}}
+
+/* V16.2 — Remplissage progressif du même verre, jusqu’à Étudiants */
+.wine-transition.is-playing .wine-transition__liquid{animation:none!important}
+.wine-transition.is-playing .wine-transition__wave{animation:none!important;opacity:.85}
+.wine-transition__progress{font-size:12px;letter-spacing:.1em;font-weight:700;color:#77324a;margin:5px 0 0}
+.wine-transition__drop{opacity:0}
+.wine-transition.is-playing .wine-transition__drop--1{animation:wineDroplet 550ms 760ms ease-in infinite}
+.wine-transition.is-playing .wine-transition__drop--2{animation:wineDroplet 620ms 880ms ease-in infinite}
+.wine-transition.is-playing .wine-transition__bubbles{animation:wineBubbles 700ms ease-in-out infinite alternate}
+@keyframes wineDroplet{0%{opacity:0;transform:translateY(-12px) scale(.5)}30%{opacity:.9}100%{opacity:0;transform:translateY(40px) scale(.3)}}
+@keyframes wineBubbles{from{transform:translateY(4px);opacity:.25}to{transform:translateY(-8px);opacity:.7}}

@@ -1,0 +1,4 @@
+SORTIR+ V16.2 — Verre de vin progressif
+Navigation par rubriques conservée. Accueil 0%, Activités 25%, Carte 50%, Événements 75%, Étudiants 100%. Le niveau revient à celui de la rubrique choisie.
+Effet SVG avec reflets, gouttes et surface ondulante ; pas une simulation 3D photoréaliste.
+Aucun changement Supabase. Tester sur ordinateur et mobile après déploiement.

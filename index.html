@@ -43,6 +43,7 @@
     <svg class="wine-transition__illustration" viewBox="0 0 760 610" role="img" aria-label="Un grand verre de vin se remplit" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="wineGlass" x1="0" x2="1"><stop stop-color="#fff" stop-opacity=".42"/><stop offset=".45" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".38"/></linearGradient>
+        <linearGradient id="winePour" x1="0" y1="0" x2="1" y2=".5"><stop stop-color="#410719"/><stop offset=".28" stop-color="#b8274e"/><stop offset=".65" stop-color="#6d0929"/><stop offset=".85" stop-color="#e45175"/><stop offset="1" stop-color="#4b071e"/></linearGradient>
         <linearGradient id="wineFill" x1="0" x2="1"><stop stop-color="#4d071c"/><stop offset=".4" stop-color="#a41e43"/><stop offset=".78" stop-color="#630c2b"/><stop offset="1" stop-color="#390818"/></linearGradient>
         <linearGradient id="bottleGlass" x1="0" x2="1"><stop stop-color="#132f27"/><stop offset=".28" stop-color="#39614c"/><stop offset=".75" stop-color="#102b22"/><stop offset="1" stop-color="#071a15"/></linearGradient>
         <clipPath id="wineBowlClip"><path d="M255 175 Q255 346 332 389 Q380 416 428 389 Q505 346 505 175 Z"/></clipPath>
@@ -57,17 +58,28 @@
         <path d="M74 240 H146" stroke="#a8876b"/><text x="110" y="263" text-anchor="middle" font-size="19" fill="#42241e" font-family="Georgia,serif">SORTIR+</text>
         <path d="M55 160 Q55 145 81 130" stroke="#e7f1e9" stroke-opacity=".45" stroke-width="9" fill="none" stroke-linecap="round"/>
       </g>
-      <g class="wine-transition__stream"><path d="M264 138 C307 151 344 182 364 240" stroke="#8b1234" stroke-width="20" fill="none" stroke-linecap="round"/><path d="M266 138 C307 153 346 184 364 237" stroke="#e95775" stroke-width="5" fill="none" stroke-linecap="round" opacity=".8"/></g>
+      <g class="wine-transition__stream">
+        <path d="M264 138 C285 149 316 165 335 190 S356 214 367 243" stroke="url(#winePour)" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <path d="M265 140 C291 151 319 174 339 197 S358 224 368 243" stroke="#f784a0" stroke-width="3" fill="none" opacity=".75" stroke-linecap="round"/>
+        <path d="M267 142 Q288 152 302 165" stroke="#fff1ed" stroke-width="2" opacity=".5" fill="none"/>
+        <ellipse class="wine-transition__drop wine-transition__drop--1" cx="364" cy="242" rx="5" ry="11" fill="#a92048"/>
+        <ellipse class="wine-transition__drop wine-transition__drop--2" cx="374" cy="254" rx="3" ry="6" fill="#dc496b"/>
+      </g>
       <g class="wine-transition__glass">
         <path d="M255 175 Q255 346 332 389 Q380 416 428 389 Q505 346 505 175" fill="url(#wineGlass)" stroke="#fff" stroke-opacity=".9" stroke-width="8"/>
-        <g clip-path="url(#wineBowlClip)"><rect class="wine-transition__liquid" x="250" y="395" width="260" height="245" fill="url(#wineFill)"/><path class="wine-transition__wave" d="M250 300 Q305 286 380 300 T510 300" fill="none" stroke="#f5a0b4" stroke-width="7" opacity=".7"/></g>
+        <g clip-path="url(#wineBowlClip)">
+          <path class="wine-transition__liquid" d="M250 405 Q380 405 510 405 L510 415 L250 415 Z" fill="url(#wineFill)"/>
+          <path class="wine-transition__wave" d="M250 405 Q380 405 510 405" fill="none" stroke="#f6a1b5" stroke-width="4" opacity=".8"/>
+          <path class="wine-transition__shine" d="M270 360 Q275 320 285 290" fill="none" stroke="#f7b3c3" stroke-width="8" opacity=".28" stroke-linecap="round"/>
+          <g class="wine-transition__bubbles" fill="#ffd6df" opacity=".55"><circle cx="355" cy="380" r="3"/><circle cx="385" cy="365" r="2"/><circle cx="405" cy="388" r="2.5"/></g>
+        </g>
         <path d="M380 403 V511 M314 528 Q380 515 446 528" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="12" stroke-linecap="round"/>
         <ellipse cx="380" cy="175" rx="125" ry="16" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="7"/>
         <path d="M280 190 Q278 327 340 377" fill="none" stroke="#fff" stroke-opacity=".42" stroke-width="9" stroke-linecap="round"/>
       </g>
     </svg>
     <div class="wine-transition__brand">SORTIR<span>+</span></div>
-    <p class="wine-transition__caption">BORDEAUX SE DÉCOUVRE</p>
+    <p class="wine-transition__caption">BORDEAUX SE DÉCOUVRE</p><p class="wine-transition__progress" aria-hidden="true"></p>
   </div>
 </div>
 
@@ -244,6 +256,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="supabase-config.js"></script>
 <script src="studio.js?v=15.5"></script>
-<script src="wine-transition.js?v=16.1"></script>
+<script src="wine-transition.js?v=16.2"></script>
 </body>
 </html>
