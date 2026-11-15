@@ -1,0 +1,10 @@
+SORTIR+ V15.5 — ESPACE PROFESSIONNEL
+
+1) IMPORTANT : avant de remplacer les fichiers GitHub, dans Supabase > SQL Editor, exécuter le contenu de ETAPE_SUPABASE_V15_5.sql puis vérifier « Success ». Ce script conserve le compte administrateur existant et les annonces.
+2) Dans Supabase > Authentication > URL Configuration : Site URL = https://gioiabourgade-hash.github.io/Sortir-plus/ ; ajouter Redirect URL https://gioiabourgade-hash.github.io/Sortir-plus/** . Attention à la majuscule S.
+3) Dans Supabase > Authentication > Providers > Email : laisser les inscriptions email activées. Pour la sécurité, conserver la confirmation d'email activée. Les emails du service par défaut Supabase sont limités : pour ouvrir les inscriptions au public, configurer un SMTP personnalisé fiable et les limites d'envoi appropriées.
+4) Dans GitHub, déposer les fichiers du ZIP à la racine du dépôt et valider (Commit changes). Le SQL n'a pas besoin d'être exécuté depuis GitHub.
+5) Tester en navigation privée avec UNE AUTRE adresse email : Espace pro > Créer un compte professionnel > confirmer email > se connecter > déposer une annonce. Elle doit rester « pending ». Revenir avec le compte administrateur, puis publier l'annonce.
+6) Les photos acceptées sont JPG/PNG/WebP jusqu'à 3 Mo ; elles sont stockées dans le bucket public listing-photos. Les photos de fiches en attente peuvent être accessibles si quelqu'un connaît leur URL ; elles ne sont pas affichées sur SORTIR+ avant validation.
+
+IMPORTANT : aucune version ne peut être garantie sans test réel sur le projet Supabase et GitHub Pages. Si le SQL échoue, NE PAS poursuivre le déploiement : fournir le message d'erreur exact.
