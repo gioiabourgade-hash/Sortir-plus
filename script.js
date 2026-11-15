@@ -18,7 +18,7 @@ function activityCard(item){return `<article class="activity-card">${item.photo_
 function renderActivities(){const q=($('#searchInput')?.value||'').trim().toLocaleLowerCase('fr'),cat=$('#categoryFilter')?.value||'Toutes',budget=$('#budgetFilter')?.value||'Tous',setting=$('#settingFilter')?.value||'Tous',onlyFav=$('#showFavorites')?.getAttribute('aria-pressed')==='true';const items=activities.filter(x=>(cat==='Toutes'||x.category===cat)&&(budget==='Tous'||x.budget===budget)&&(setting==='Tous'||x.setting===setting)&&(!onlyFav||favorites.has(x.id))&&`${x.name} ${x.description} ${x.category} ${x.place}`.toLocaleLowerCase('fr').includes(q));$('#activityCount').textContent=items.length+' sortie'+(items.length>1?'s':'')+' trouvée'+(items.length>1?'s':'');$('#allCards').innerHTML=items.length?items.map(activityCard).join(''):'<p>Aucun lieu ne correspond à ces filtres. Essaie une autre recherche.</p>';}
 function initMap(){if(map||!window.L||!$('#activityMap'))return;map=L.map('activityMap').setView([44.8378,-0.5792],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);markerLayer=L.layerGroup().addTo(map);renderMapMarkers();}
 function renderMapMarkers(){if(!map||!markerLayer)return;markerLayer.clearLayers();const cat=$('#mapCategory')?.value||'Toutes';activities.filter(x=>(cat==='Toutes'||x.category===cat)&&cat!=='Événements'&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)).forEach(x=>{const marker=L.circleMarker([x.lat,x.lng],{radius:9,color:'#fff',weight:2,fillColor:colors[x.category]||'#172d35',fillOpacity:1});marker.bindPopup(`<div class="map-popup"><strong>${x.name}</strong><span>${x.category} · ${x.place}</span><br><a href="${mapsUrl(x)}" target="_blank" rel="noopener">Itinéraire ↗</a></div>`).addTo(markerLayer);});if(cat==='Toutes'||cat==='Événements'){eventData.filter(e=>e.end>=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Paris'})).forEach(e=>{const pos=eventLocations[e.place];if(!pos)return;L.circleMarker(pos,{radius:10,color:'#ffffff',weight:2,fillColor:'#C46B3B',fillOpacity:1}).bindPopup(`<div class="map-popup"><strong>${safeText(e.title)}</strong><span>Événement · ${safeText(e.place)}</span><br><a href="#evenements">Voir la fiche événement ↗</a></div>`).addTo(markerLayer);});}}
-function navigate(){const route=location.hash.slice(1)||'accueil',allowed=['accueil','activites','carte','evenements','etudiants','decouvrir','culture','histoire','restaurants','avis','contact','admin'],target=allowed.includes(route)?route:'accueil';if(document.body.classList.contains('immersive-mode')&&target!=='admin'){document.querySelectorAll('.page').forEach(p=>p.classList.add('active'));const section=$('#page-'+target);if(section)requestAnimationFrame(()=>section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}));}else{document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$('#page-'+target)?.classList.add('active');}document.querySelectorAll('#mainNav a').forEach(a=>a.classList.toggle('selected',a.getAttribute('href')==='#'+target));$('#mainNav').classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');if(!document.body.classList.contains('immersive-mode')||target==='admin')window.scrollTo(0,0);if(target==='carte'){initMap();setTimeout(()=>map&&map.invalidateSize(),120);}}
+function navigate(){const route=location.hash.slice(1)||'accueil',allowed=['accueil','activites','carte','evenements','etudiants','decouvrir','culture','histoire','restaurants','avis','contact','admin'],target=allowed.includes(route)?route:'accueil';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$('#page-'+target)?.classList.add('active');document.querySelectorAll('#mainNav a').forEach(a=>a.classList.toggle('selected',a.getAttribute('href')==='#'+target));$('#mainNav').classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');window.scrollTo(0,0);if(target==='carte'){initMap();setTimeout(()=>map&&map.invalidateSize(),120);}}
 $('#menuToggle').addEventListener('click',()=>{const open=$('#mainNav').classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(open));});
 ['searchInput','categoryFilter','budgetFilter','settingFilter'].forEach(id=>$('#'+id)?.addEventListener(id==='searchInput'?'input':'change',renderActivities));
 $('#showFavorites')?.addEventListener('click',()=>{const b=$('#showFavorites'),on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',String(on));b.textContent=on?'♥ Favoris uniquement':'♡ Mes favoris';renderActivities();});
@@ -140,30 +140,4 @@ document.addEventListener('click', e => {
      card.append(tag,title,info,desc,link);results.append(card);
    });
  });
-})();
-
-
-// SORTIR+ V16 — progressive enhancement; existing account and Supabase code unchanged.
-(()=>{
- const toggle=document.getElementById('immersiveToggle');
- const nav=document.getElementById('mainNav');
- const routes=['accueil','activites','carte','evenements','etudiants','decouvrir','culture','histoire','restaurants','avis','contact'];
- const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
- let observer=null;
- function updateToggle(){const on=document.body.classList.contains('immersive-mode');toggle.setAttribute('aria-pressed',String(on));toggle.textContent=on?'✕ Quitter le parcours':'↕ Parcours immersif';}
- function setMode(on){
-   document.body.classList.toggle('immersive-mode',on);updateToggle();
-   if(observer){observer.disconnect();observer=null;}
-   if(on){
-     document.querySelectorAll('.page').forEach(p=>p.classList.add('active'));
-     observer=new IntersectionObserver(entries=>{const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!visible)return;const route=visible.target.id.replace('page-','');nav.querySelectorAll('a').forEach(a=>a.classList.toggle('selected',a.getAttribute('href')==='#'+route));},{rootMargin:'-15% 0px -45% 0px',threshold:[0,.15,.4,.7]});
-     routes.forEach(r=>{const el=document.getElementById('page-'+r);if(el)observer.observe(el)});
-     const route=location.hash.slice(1);const el=document.getElementById('page-'+(routes.includes(route)?route:'accueil'));el?.scrollIntoView({behavior:'auto'});
-     if(typeof initMap==='function'){try{initMap();setTimeout(()=>{if(typeof map!=='undefined'&&map)map.invalidateSize()},350)}catch(e){console.warn('Map init deferred',e)}}
-   }else{if(typeof navigate==='function')navigate();}
- }
- toggle.addEventListener('click',()=>{const on=!document.body.classList.contains('immersive-mode');if(on&&location.hash==='#admin')location.hash='#accueil';setMode(on)});
- // Optional short editorial wine-themed transition on navigation; never on login/admin or reduced motion.
- const transition=document.getElementById('wineTransition');let timeout;
- window.addEventListener('hashchange',()=>{const route=location.hash.slice(1);if(motion.matches||document.body.classList.contains('immersive-mode')||route==='admin')return;transition.classList.remove('playing');void transition.offsetWidth;transition.classList.add('playing');clearTimeout(timeout);timeout=setTimeout(()=>transition.classList.remove('playing'),800)});
 })();

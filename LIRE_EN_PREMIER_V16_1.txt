@@ -1,0 +1,10 @@
+SORTIR+ V16.1 — TRANSITION VERRE DE VIN
+
+Base : V15.6 fournie par l’utilisatrice.
+Navigation classique par rubriques, sans défilement immersif.
+Transition visuelle grand format entre rubriques publiques : bouteille, vin versé, verre qui se remplit, rideau bordeaux.
+La transition est un dessin vectoriel animé avec profondeur, pas un modèle 3D WebGL photoréaliste.
+Aucun changement SQL ou Supabase.
+Les liens vers l’administration et les connexions restent sans animation.
+Respecte la préférence système de réduction des animations.
+Publier tous les fichiers à la racine du dépôt GitHub Pages.
