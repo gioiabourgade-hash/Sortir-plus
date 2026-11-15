@@ -171,3 +171,18 @@ body{background:var(--cream)}.topbar{box-shadow:0 3px 18px #173e3217}.page.activ
 .wine-transition.is-playing .wine-transition__bubbles{animation:wineBubbles 700ms ease-in-out infinite alternate}
 @keyframes wineDroplet{0%{opacity:0;transform:translateY(-12px) scale(.5)}30%{opacity:.9}100%{opacity:0;transform:translateY(40px) scale(.3)}}
 @keyframes wineBubbles{from{transform:translateY(4px);opacity:.25}to{transform:translateY(-8px);opacity:.7}}
+
+/* V16.3 — Le vin apparaît uniquement lors d’un chargement lent ou hors ligne. */
+.wine-transition.is-loading{visibility:visible;opacity:1;pointer-events:auto}
+.wine-transition.is-loading .wine-transition__backdrop{transform:none;background:radial-gradient(ellipse at 52% 43%,#f9e6e4 0%,#e9c8cc 52%,#5c1b37 110%)}
+.wine-transition.is-loading .wine-transition__stage{opacity:1;transform:none}
+.wine-transition.is-loading .wine-transition__stream{opacity:1;transform:none;animation:wineFlowLoading 1.1s ease-in-out infinite alternate;filter:drop-shadow(0 1px 3px #7a1c43)}
+.wine-transition.is-loading .wine-transition__liquid{animation:none!important}
+.wine-transition.is-loading .wine-transition__wave{opacity:.85;animation:none!important}
+.wine-transition.is-loading .wine-transition__bottle{animation:wineTiltLoading 2s ease-in-out infinite alternate}
+.wine-transition.is-loading .wine-transition__drop--1{animation:wineDroplet 550ms ease-in infinite}
+.wine-transition.is-loading .wine-transition__drop--2{animation:wineDroplet 630ms 180ms ease-in infinite}
+.wine-transition.is-loading .wine-transition__progress{display:block}
+@keyframes wineFlowLoading{from{opacity:.65;transform:scaleX(.85)}to{opacity:1;transform:scaleX(1.06)}}
+@keyframes wineTiltLoading{from{transform:rotate(0deg)}to{transform:rotate(-5deg)}}
+@media(prefers-reduced-motion:reduce){.wine-transition.is-loading{display:grid!important}.wine-transition.is-loading .wine-transition__stream,.wine-transition.is-loading .wine-transition__bottle,.wine-transition.is-loading .wine-transition__drop{animation:none!important}}

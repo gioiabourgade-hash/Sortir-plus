@@ -13,12 +13,15 @@
   <meta property="og:description" content="Activités, sorties, événements et bons plans étudiants à Bordeaux et dans la métropole.">
   <meta property="og:url" content="https://gioiabourgade-hash.github.io/Sortir-plus/">
   <meta name="theme-color" content="#173e32">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <title>SORTIR+ | Activités et sorties à Bordeaux et alentours</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="style.css?v=16.1">
+  <link rel="stylesheet" href="style.css?v=16.3">
 </head>
 <body>
 <header class="topbar">
@@ -36,8 +39,8 @@
 </header>
 
 
-<!-- Transition Bordeaux : animation graphique plein écran, sans défilement vertical imposé -->
-<div id="wineTransition" class="wine-transition" aria-hidden="true">
+<!-- Animation réservée aux chargements longs et aux pertes de connexion -->
+<div id="wineTransition" class="wine-transition" role="status" aria-live="polite" aria-label="Chargement de SORTIR+">
   <div class="wine-transition__backdrop"></div>
   <div class="wine-transition__stage">
     <svg class="wine-transition__illustration" viewBox="0 0 760 610" role="img" aria-label="Un grand verre de vin se remplit" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +82,7 @@
       </g>
     </svg>
     <div class="wine-transition__brand">SORTIR<span>+</span></div>
-    <p class="wine-transition__caption">BORDEAUX SE DÉCOUVRE</p><p class="wine-transition__progress" aria-hidden="true"></p>
+    <p class="wine-transition__caption">CHARGEMENT EN COURS…</p><p class="wine-transition__progress" aria-hidden="true"></p>
   </div>
 </div>
 
@@ -256,6 +259,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="supabase-config.js"></script>
 <script src="studio.js?v=15.5"></script>
-<script src="wine-transition.js?v=16.2"></script>
+<script src="wine-loader.js?v=16.3"></script>
 </body>
 </html>
