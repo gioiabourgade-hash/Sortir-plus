@@ -1,0 +1,1 @@
+SORTIR+ V15.4 : correction du flux de récupération Supabase. Ne supprime plus les jetons avant validation; initialise la session avant enregistrement; retire #admin de redirectTo. Dans Supabase Authentication > URL Configuration, ajouter https://gioiabourgade-hash.github.io/Sortir-plus/** aux Redirect URLs.

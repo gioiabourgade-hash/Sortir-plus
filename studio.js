@@ -6,7 +6,20 @@
  if(!window.supabase || !url || !key || key.includes('COLLER_ICI')) {status('Configuration en attente : renseignez la clé publique dans supabase-config.js. Le catalogue V14 reste disponible.');return;}
  const client=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
  let user=null, role='user', rows=[];
- const recoveryRequested=new URLSearchParams(location.search).get('sortir_recovery')==='1';
+ const query=new URLSearchParams(location.search);
+ const recoveryRequested=query.get('sortir_recovery')==='1'||query.has('code')||query.has('token_hash')||location.hash.includes('type=recovery');
+ let recoveryReady=false;
+ let recoveryProblem='';
+ // Ne pas supprimer les jetons de l'URL avant que Supabase les ait traités.
+ const recoveryInit=client.auth.initialize().then(async()=>{
+  if(query.has('token_hash') && query.get('type')==='recovery'){
+   const {error}=await client.auth.verifyOtp({token_hash:query.get('token_hash'),type:'recovery'});
+   if(error)throw error;
+  }
+  const {data,error}=await client.auth.getSession();
+  if(error)throw error;
+  recoveryReady=!!data.session;
+ }).catch(err=>{recoveryProblem=err.message||String(err)});
  let recoveryMode=recoveryRequested;
  function showAuthPanel(which){
   el('studioLoginPanel').hidden=which!=='login';
@@ -43,7 +56,7 @@
  el('studioBackLogin').addEventListener('click',()=>{showAuthPanel('login');status('');});
  el('studioForgotForm').addEventListener('submit',async e=>{
   e.preventDefault();status('Envoi du lien en cours…');
-  const redirectTo=location.origin+location.pathname+'?sortir_recovery=1#admin';
+  const redirectTo=location.origin+location.pathname+'?sortir_recovery=1';
   const {error}=await client.auth.resetPasswordForEmail(el('studioForgotEmail').value.trim(),{redirectTo});
   if(error){status('Envoi impossible : '+error.message);return;}
   status('Si cette adresse correspond à un compte, un email de récupération a été envoyé. Vérifiez aussi les courriers indésirables.');
@@ -51,8 +64,10 @@
  el('studioNewPasswordForm').addEventListener('submit',async e=>{
   e.preventDefault();const password=el('studioNewPassword').value;
   if(password!==el('studioConfirmPassword').value){status('Les deux mots de passe ne correspondent pas.');return;}
-  const {data:{session},error:sessionError}=await client.auth.getSession();
-  if(sessionError||!session){status('Lien expiré ou invalide. Retournez à la connexion et demandez un nouveau lien.');return;}
+  await recoveryInit;
+  const {data,error:sessionError}=await client.auth.getSession();
+  const session=data?.session;
+  if(sessionError||!session){status('Impossible de valider le lien de récupération'+(recoveryProblem?' : '+recoveryProblem:'')+'. Ouvrez uniquement le dernier email reçu, dans le même navigateur.');return;}
   status('Enregistrement du mot de passe…');
   const {error}=await client.auth.updateUser({password});
   if(error){status('Impossible de modifier le mot de passe : '+error.message);return;}
@@ -65,7 +80,8 @@
  el('studioLogout').addEventListener('click',async()=>{await client.auth.signOut();await refreshAuth();status('Déconnecté.');});el('studioReset').addEventListener('click',reset);el('studioFilter').addEventListener('change',draw);
  el('studioForm').addEventListener('submit',async e=>{e.preventDefault();if(!user)return status('Connectez-vous.');const kind=el('studioKind').value;const row={kind,owner_id:user.id};for(const [k,f] of Object.entries(fields))row[k]=el(f).value.trim()||(k==='starts_on'||k==='ends_on'?null:'');if(kind==='event'&&(!row.starts_on||!row.ends_on))return status('Indique les dates de début et de fin de cet événement.');if(kind==='event'&&row.ends_on<row.starts_on)return status('La date de fin doit suivre la date de début.');if(kind!=='event'){row.starts_on=null;row.ends_on=null}if(row.booking_url&&!/^https:\/\//.test(row.booking_url))return status('Le lien doit commencer par https://');
  try{const id=el('studioId').value;let error;if(id){delete row.owner_id;({error}=await client.from('listings').update({...row,updated_at:new Date().toISOString()}).eq('id',id));}else{row.status=role==='admin'?'published':'pending';({error}=await client.from('listings').insert(row));}if(error)throw error;reset();await reload();await publicRefresh();status(role==='admin'?'Annonce enregistrée.':'Annonce soumise à validation.')}catch(err){status('Enregistrement refusé : '+err.message)}});
- client.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){recoveryMode=true;history.replaceState(null,'',location.pathname+'?sortir_recovery=1#admin');showAuthPanel('reset');window.dispatchEvent(new Event('hashchange'));status('Saisissez votre nouveau mot de passe.');} setTimeout(()=>refreshAuth().catch(e=>status(e.message)),0)});
+ client.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){recoveryMode=true;recoveryReady=true;showAuthPanel('reset');status('Saisissez votre nouveau mot de passe.');} setTimeout(()=>refreshAuth().catch(e=>status(e.message)),0)});
+ recoveryInit.then(()=>{if(recoveryMode){showAuthPanel('reset');if(!recoveryReady)status('Le lien ne permet pas encore une session valide'+(recoveryProblem?' : '+recoveryProblem:'')+'. Vérifiez que vous ouvrez le dernier email reçu.');}});
  refreshAuth().catch(e=>status(e.message));publicRefresh().catch(e=>status('Synchronisation indisponible : '+e.message));
  setInterval(()=>publicRefresh().catch(()=>{}),60000);
 })();
