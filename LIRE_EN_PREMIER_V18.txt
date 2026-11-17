@@ -1,0 +1,9 @@
+SORTIR+ V18 — CORRECTIONS DEMANDÉES
+
+1. Ce week-end apparaît dans Événements, plus dans le menu principal.
+2. Les catégories Étudiants permettent de filtrer les offres ; les cartes génériques sont des raccourcis.
+3. L’espace pro accepte les photos depuis la photothèque ou appareil du téléphone ; une case permet de retirer la photo liée à une annonce existante. Cette action retire le lien de la fiche, sans supprimer le fichier du stockage Supabase.
+4. Fiches Kart System et Escape Hunt enrichies à partir des sites officiels.
+5. Aucune modification SQL requise. Tester sur téléphone et avec un compte partenaire.
+
+IMPORTANT : les offres Fitness Park affichées sur le site national sont promotionnelles, pas nécessairement des tarifs étudiants dédiés.

@@ -34,8 +34,8 @@
  const kindLabels={event:'Événement',restaurant:'Restaurant',activity:'Activité'};
  const statusLabels={pending:'En attente',published:'Publiée',rejected:'Refusée'};
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function reset(){el('studioForm').reset();el('studioId').value='';el('studioFormTitle').textContent='Nouvelle annonce';el('studioPhotoHint').textContent='La photo sera envoyée uniquement lors de l’enregistrement de la fiche.';}
- function edit(id){const row=rows.find(r=>r.id===id);if(!row)return;el('studioId').value=id;el('studioKind').value=row.kind;for(const [k,f] of Object.entries(fields))el(f).value=row[k]||'';el('studioFormTitle').textContent='Modifier une annonce';el('studioPhotoHint').textContent=row.photo_url?'Une photo est déjà enregistrée. Choisissez un fichier pour la remplacer.':'Aucune photo enregistrée.';el('studioForm').scrollIntoView({behavior:'smooth',block:'start'});}
+ function reset(){el('studioForm').reset();el('studioRemovePhoto').checked=false;el('studioId').value='';el('studioFormTitle').textContent='Nouvelle annonce';el('studioPhotoHint').textContent='La photo sera envoyée uniquement lors de l’enregistrement de la fiche.';}
+ function edit(id){const row=rows.find(r=>r.id===id);if(!row)return;el('studioId').value=id;el('studioRemovePhoto').checked=false;el('studioKind').value=row.kind;for(const [k,f] of Object.entries(fields))el(f).value=row[k]||'';el('studioFormTitle').textContent='Modifier une annonce';el('studioPhotoHint').textContent=row.photo_url?'Une photo est déjà enregistrée. Choisissez un fichier pour la remplacer.':'Aucune photo enregistrée.';el('studioForm').scrollIntoView({behavior:'smooth',block:'start'});}
  function draw(){const type=el('studioFilter').value;const selected=rows.filter(r=>(type==='all'||r.kind===type)&&(role==='admin'||r.owner_id===user?.id));el('studioList').replaceChildren();if(!selected.length){el('studioList').textContent='Aucune annonce pour le moment.';return;}
  for(const r of selected){const box=document.createElement('div');box.className='studio-item';const name=document.createElement('div');name.innerHTML=`<strong>${esc(r.title)}</strong><small>${esc(kindLabels[r.kind]||r.kind)} · ${esc(statusLabels[r.status]||r.status)} · ${esc(r.place)}</small>`;const actions=document.createElement('div');actions.className='studio-item-actions';const editBtn=document.createElement('button');editBtn.textContent='Modifier';editBtn.onclick=()=>edit(r.id);actions.append(editBtn);
  if(role==='admin'&&r.status!=='published'){const pub=document.createElement('button');pub.textContent='Publier';pub.onclick=()=>setStatus(r.id,'published');actions.append(pub)}
@@ -99,6 +99,8 @@
  try{const id=el('studioId').value;let error;
  if(id){const existing=rows.find(x=>x.id===id);if(!existing||role!=='admin'&&(existing.owner_id!==user.id||existing.status!=='pending'))return status('Cette fiche ne peut plus être modifiée : contactez SORTIR+ pour une modification après validation.');}
  const photo=el('studioPhoto').files[0];
+ if(el('studioRemovePhoto').checked && !photo && id)row.photo_url=null;
+ if(el('studioRemovePhoto').checked && !id)return status('La suppression de photo est disponible lors de la modification d’une annonce.');
  if(photo){
   if(!['image/jpeg','image/png','image/webp'].includes(photo.type)||photo.size>3*1024*1024) return status('Photo refusée : JPG, PNG ou WebP, 3 Mo maximum.');
   const extension={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[photo.type];
