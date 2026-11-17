@@ -1,0 +1,12 @@
+SORTIR+ V17 — édition enrichie (17 novembre 2026)
+
+Téléverser tous les fichiers de ce dossier à la racine du dépôt GitHub Sortir-plus (branche main), en conservant les noms.
+Ne pas exécuter de nouvelle migration SQL : comptes partenaires, rôles et validation Supabase restent inchangés.
+
+AJOUTS : 3 restaurants (prix indicatifs fournis pour UTOPY et BLŌSSOM), 4 activités (karting, bowling, deux Escape Hunt), 5 événements datés du 20 au 22 novembre 2026, page Ce week-end filtrée automatiquement, offres étudiantes vérifiées, recherche sur carte, carnet privé d'avis. Favoris des activités déjà existants conservés.
+
+ATTENTION : les avis saisis sont PRIVÉS et enregistrés dans le navigateur uniquement. Ils ne sont pas visibles par les autres visiteurs. Aucune fausse note publique. Les coordonnées des nouveaux lieux ne sont pas ajoutées comme marqueurs tant qu'elles ne sont pas vérifiées. La recherche de carte s'applique aux points déjà affichés.
+
+Les événements ne sont pas mis à jour automatiquement depuis le web : il faut enrichir evenements.json régulièrement. Les tarifs, horaires et promotions changent : vérifier avant publication.
+
+Tests à faire : accueil, navigation, carte, week-end, activités, restaurants, mobile, connexion partenaire, validation admin, récupération mot de passe.

@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "id": "kart-system-karting",
+    "name": "Karting KART System Bordeaux-Lac",
+    "category": "Sport",
+    "description": "Karting indoor, piste de 660 m. Séance de 10 minutes : 26 €. Dès 11 ans et 1,45 m, restrictions horaires pour les 11–13 ans.",
+    "place": "Bordeaux-Lac",
+    "address": "2 rue du Grand Barail, 33300 Bordeaux",
+    "lat": 44.889,
+    "lng": -0.5668,
+    "icon": "🏎",
+    "budget": "Payant",
+    "setting": "Intérieur",
+    "price": "26 € / 10 min",
+    "url": "https://kartsystem.com/bordeaux-particuliers.html",
+    "transport": "Tram C et bus : vérifier l’itinéraire"
+  },
+  {
+    "id": "kart-system-bowling",
+    "name": "Bowling KART System Bordeaux-Lac",
+    "category": "Loisirs",
+    "description": "20 pistes de bowling. 8 € la partie en semaine, 10 € le week-end (selon les périodes).",
+    "place": "Bordeaux-Lac",
+    "address": "2 rue du Grand Barail, 33300 Bordeaux",
+    "lat": 44.889,
+    "lng": -0.5668,
+    "icon": "🎳",
+    "budget": "Petit budget",
+    "setting": "Intérieur",
+    "price": "8–10 € / partie",
+    "url": "https://kartsystem.com/bordeaux-particuliers.html",
+    "transport": "Tram C et bus : vérifier l’itinéraire"
+  },
+  {
+    "id": "escape-hunt-gare",
+    "name": "Escape Hunt — Gare Saint-Jean",
+    "category": "Loisirs",
+    "description": "Escape game en équipe, scénarios variés. De 26 à 40 € par personne pour les salles classiques selon le nombre de joueurs.",
+    "place": "Bordeaux · Saint-Jean",
+    "address": "5 rue Pierre Loti, 33800 Bordeaux",
+    "lat": 44.8255,
+    "lng": -0.5544,
+    "icon": "🔐",
+    "budget": "Payant",
+    "setting": "Intérieur",
+    "price": "26–40 € / personne",
+    "url": "https://escapehunt.com/fr/bordeaux/",
+    "transport": "Tram C · Gare Saint-Jean"
+  },
+  {
+    "id": "escape-hunt-tourny",
+    "name": "Escape Hunt — Tourny",
+    "category": "Loisirs",
+    "description": "Des énigmes à résoudre entre amis ou en famille, dans des décors immersifs. Tarif variable selon le scénario et l’équipe.",
+    "place": "Bordeaux · Tourny",
+    "address": "68 rue Lafaurie de Monbadon, 33000 Bordeaux",
+    "lat": 44.8468,
+    "lng": -0.5808,
+    "icon": "🔐",
+    "budget": "Payant",
+    "setting": "Intérieur",
+    "price": "Tarifs selon scénario",
+    "url": "https://escapehunt.com/fr/bordeaux/",
+    "transport": "Tram D · Fondaudège / Museum"
+  }
+]

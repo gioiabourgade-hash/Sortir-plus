@@ -97,5 +97,61 @@
     "place": "Bordeaux",
     "description": "Foire à la brocante automnale.",
     "source": "https://www.bordeaux-tourisme.com/agenda.html"
+  },
+  {
+    "title": "Brocante d’automne aux Quinconces",
+    "start": "2026-11-20",
+    "end": "2026-11-22",
+    "category": "Marché",
+    "place": "Place des Quinconces",
+    "description": "Flâner parmi les stands de la brocante d’automne.",
+    "hours": "10h–19h",
+    "price": "Accès : vérifier auprès de l’organisateur",
+    "booking": "Entrée et modalités à vérifier",
+    "source": "https://bordeaux.evous.fr/sorties/week-end/du-20-21-et-22-novembre-2026/"
+  },
+  {
+    "title": "Inauguration du cinéma Utopia Palmer",
+    "start": "2026-11-21",
+    "end": "2026-11-21",
+    "category": "Culture",
+    "place": "Utopia Palmer, Cenon",
+    "description": "Visites libres du cinéma à l’occasion de son inauguration.",
+    "hours": "10h–14h pour les visites",
+    "price": "Conditions à vérifier",
+    "source": "https://bordeaux.evous.fr/sorties/week-end/du-20-21-et-22-novembre-2026/"
+  },
+  {
+    "title": "Les Nouvelles Barriquades",
+    "start": "2026-11-21",
+    "end": "2026-11-22",
+    "category": "Festival",
+    "place": "Cité du Vin",
+    "description": "Événement consacré aux vins bio à la Cité du Vin. Programme et accès à vérifier.",
+    "hours": "Sam. 11h–23h · Dim. 11h–18h",
+    "price": "Tarifs à vérifier",
+    "source": "https://bordeaux.evous.fr/sorties/week-end/du-20-21-et-22-novembre-2026/"
+  },
+  {
+    "title": "Marché de Noël afro-caribéen",
+    "start": "2026-11-22",
+    "end": "2026-11-22",
+    "category": "Marché",
+    "place": "Rocher de Palmer, Cenon",
+    "description": "Marché de Noël afro-caribéen au Rocher de Palmer.",
+    "hours": "10h–19h",
+    "price": "Tarifs à vérifier",
+    "source": "https://bordeaux.evous.fr/sorties/week-end/du-20-21-et-22-novembre-2026/"
+  },
+  {
+    "title": "Boxers de Bordeaux – Nice",
+    "start": "2026-11-22",
+    "end": "2026-11-22",
+    "category": "Sport",
+    "place": "Patinoire Mériadeck",
+    "description": "Match de hockey sur glace à Bordeaux.",
+    "hours": "18h15",
+    "price": "Billetterie à consulter",
+    "source": "https://bordeaux.evous.fr/sorties/week-end/du-20-21-et-22-novembre-2026/"
   }
 ]

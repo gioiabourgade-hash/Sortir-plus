@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "name": "UTOPY Café Cantine",
+    "category": "Brunch · Coffee shop",
+    "place": "Le Bouscat",
+    "address": "62 avenue de la Libération Charles de Gaulle, 33110 Le Bouscat",
+    "description": "Brunch du mercredi au dimanche, cafés de spécialité L’Alchimiste, tartines et pâtisseries maison. Terrasse selon disponibilité. Fermé lundi et mardi.",
+    "price": "20–30 € / personne (budget indicatif fourni)",
+    "url": "https://utopy-cafe.fr/",
+    "source": "https://utopy-cafe.fr/contactez-nous.html",
+    "hours": "Mer. 9h–18h · Jeu.–ven. 8h–18h · Sam. 9h–18h · Dim. 9h–17h"
+  },
+  {
+    "name": "BLŌSSOM",
+    "category": "Brunch · Bowls · Coffee shop",
+    "place": "Bordeaux · Grosse Cloche",
+    "address": "106 cours Victor Hugo, 33000 Bordeaux",
+    "description": "Bowls frais, toasts gourmands, brunch et café dans une ambiance chaleureuse, face à la Grosse Cloche.",
+    "price": "10–20 € / personne (budget indicatif fourni)",
+    "url": "https://blossom-bordeaux.com/",
+    "source": "https://blossom-bordeaux.com/",
+    "hours": "Tous les jours 11h–22h"
+  },
+  {
+    "name": "Pampa",
+    "category": "Restaurant · Cuisine française",
+    "place": "Bordeaux · Boulevard Godard",
+    "address": "54 boulevard Godard, 33000 Bordeaux",
+    "description": "Restaurant bordelais : consulte la carte et les disponibilités avant de réserver.",
+    "price": "30–40 € / personne (estimation Google, à confirmer)",
+    "url": "https://www.google.com/maps/search/?api=1&query=Pampa+54+boulevard+Godard+Bordeaux",
+    "source": "https://www.google.com/maps/search/?api=1&query=Pampa+54+boulevard+Godard+Bordeaux",
+    "hours": "Horaires à confirmer auprès du restaurant"
+  }
+]
