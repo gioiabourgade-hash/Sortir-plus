@@ -31,5 +31,60 @@
     "url": "https://www.google.com/maps/search/?api=1&query=Pampa+54+boulevard+Godard+Bordeaux",
     "source": "https://www.google.com/maps/search/?api=1&query=Pampa+54+boulevard+Godard+Bordeaux",
     "hours": "Horaires à confirmer auprès du restaurant"
+  },
+  {
+    "name": "Les Drôles",
+    "category": "Cuisine française · Sud-Ouest",
+    "place": "Bordeaux · Saint-Pierre",
+    "address": "21 rue Saint-Rémi, 33000 Bordeaux",
+    "description": "Cuisine traditionnelle du Sud-Ouest et plats faits maison, dans un cadre chaleureux. Menu entrée, plat et dessert à 27 €, ou formule deux plats à 25 € ; suppléments possibles. Réservation conseillée.",
+    "price": "25–27 € / menu (hors suppléments)",
+    "url": "https://www.restaurantlesdroles.fr/",
+    "source": "https://www.restaurantlesdroles.fr/menus/",
+    "hours": "Horaires sur le site officiel"
+  },
+  {
+    "name": "Tigermilk Bordeaux",
+    "category": "Cuisine latino-américaine · Brunch",
+    "place": "Bordeaux · Place de la Bourse",
+    "address": "1 rue des Lauriers, 33000 Bordeaux",
+    "description": "Cuisine aux influences latino-américaines : tacos, quesadillas, ceviches et cocktails. Brunch proposé le dimanche. Ambiance conviviale et colorée.",
+    "price": "Brunch du dimanche : 27 € (carte variable)",
+    "url": "https://tigermilkrestaurants.com/fr/restaurants/bordeaux-bourse/",
+    "source": "https://tigermilkrestaurants.com/wp-content/uploads/2026/02/Bordeaux-EN.pdf",
+    "hours": "Midi et soir ; brunch le dimanche"
+  },
+  {
+    "name": "Arcada",
+    "category": "Bistronomie · Cuisine française",
+    "place": "Bordeaux · Saint-Pierre",
+    "address": "13 rue de la Rousselle, 33000 Bordeaux",
+    "description": "Restaurant bistronomique proposant une cuisine française de saison et des assiettes soignées. Idéal pour un dîner en couple ou une occasion spéciale.",
+    "price": "Tarifs à consulter sur la carte",
+    "url": "https://www.google.com/maps/search/?api=1&query=Arcada+13+rue+de+la+Rousselle+Bordeaux",
+    "source": "https://www.google.com/maps/search/?api=1&query=Arcada+13+rue+de+la+Rousselle+Bordeaux",
+    "hours": "Réservation et horaires à vérifier"
+  },
+  {
+    "name": "Berthus",
+    "category": "Bistronomie · Cuisine française",
+    "place": "Bordeaux · Saint-Pierre",
+    "address": "15 rue des Bahutiers, 33000 Bordeaux",
+    "description": "Une table bistronomique intimiste du centre historique, connue pour son menu de saison et ses assiettes créatives.",
+    "price": "Menu autour de 29 € (à confirmer)",
+    "url": "https://www.google.com/maps/search/?api=1&query=Berthus+15+rue+des+Bahutiers+Bordeaux",
+    "source": "https://www.google.com/maps/search/?api=1&query=Berthus+15+rue+des+Bahutiers+Bordeaux",
+    "hours": "Réservation et horaires à vérifier"
+  },
+  {
+    "name": "Osteria Palatino",
+    "category": "Restaurant italien · Pizzas",
+    "place": "Bordeaux · Centre historique",
+    "address": "8 rue de la Merci, 33000 Bordeaux",
+    "description": "Restaurant italien animé du groupe Big Mamma, avec pizzas, pâtes fraîches, antipasti et desserts italiens dans un décor généreux.",
+    "price": "Tarifs à consulter sur la carte",
+    "url": "https://www.google.com/maps/search/?api=1&query=Osteria+Palatino+8+rue+de+la+Merci+Bordeaux",
+    "source": "https://www.google.com/maps/search/?api=1&query=Osteria+Palatino+8+rue+de+la+Merci+Bordeaux",
+    "hours": "Ouvert midi et soir ; horaires à vérifier"
   }
 ]
