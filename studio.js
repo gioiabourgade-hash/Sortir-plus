@@ -34,8 +34,26 @@
  const kindLabels={event:'Événement',restaurant:'Restaurant',activity:'Activité'};
  const statusLabels={pending:'En attente',published:'Publiée',rejected:'Refusée'};
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function reset(){el('studioForm').reset();el('studioRemovePhoto').checked=false;el('studioId').value='';el('studioFormTitle').textContent='Nouvelle annonce';el('studioPhotoHint').textContent='La photo sera envoyée uniquement lors de l’enregistrement de la fiche.';}
- function edit(id){const row=rows.find(r=>r.id===id);if(!row)return;el('studioId').value=id;el('studioRemovePhoto').checked=false;el('studioKind').value=row.kind;for(const [k,f] of Object.entries(fields))el(f).value=row[k]||'';el('studioFormTitle').textContent='Modifier une annonce';el('studioPhotoHint').textContent=row.photo_url?'Une photo est déjà enregistrée. Choisissez un fichier pour la remplacer.':'Aucune photo enregistrée.';el('studioForm').scrollIntoView({behavior:'smooth',block:'start'});}
+ let photoPreviewObjectUrl=null;
+ function updatePhotoPreview(url){
+  if(photoPreviewObjectUrl){URL.revokeObjectURL(photoPreviewObjectUrl);photoPreviewObjectUrl=null;}
+  const preview=el('studioPhotoPreview'),img=el('studioPhotoPreviewImg');
+  preview.hidden=!url;
+  if(url)img.src=url;else img.removeAttribute('src');
+ }
+ el('studioPhoto').addEventListener('change',()=>{
+  const file=el('studioPhoto').files[0];
+  if(file){updatePhotoPreview(null);photoPreviewObjectUrl=URL.createObjectURL(file);el('studioPhotoPreview').hidden=false;el('studioPhotoPreviewImg').src=photoPreviewObjectUrl;el('studioRemovePhoto').checked=false;}
+  else{const row=rows.find(r=>r.id===el('studioId').value);updatePhotoPreview(!el('studioRemovePhoto').checked?row?.photo_url:null);}
+ });
+ el('studioPhotoRemoveButton').addEventListener('click',()=>{
+  const hasExisting=!!rows.find(r=>r.id===el('studioId').value)?.photo_url;
+  el('studioPhoto').value='';el('studioRemovePhoto').checked=hasExisting;
+  updatePhotoPreview(null);
+  el('studioPhotoHint').textContent=hasExisting?'La photo sera retirée après l’enregistrement de l’annonce.':'Photo sélectionnée retirée. Aucune photo ne sera envoyée.';
+ });
+ function reset(){updatePhotoPreview(null);el('studioForm').reset();el('studioRemovePhoto').checked=false;el('studioId').value='';el('studioFormTitle').textContent='Nouvelle annonce';el('studioPhotoHint').textContent='La photo sera envoyée uniquement lors de l’enregistrement de la fiche.';}
+ function edit(id){const row=rows.find(r=>r.id===id);if(!row)return;el('studioId').value=id;el('studioRemovePhoto').checked=false;el('studioPhoto').value='';updatePhotoPreview(row.photo_url||null);el('studioKind').value=row.kind;for(const [k,f] of Object.entries(fields))el(f).value=row[k]||'';el('studioFormTitle').textContent='Modifier une annonce';el('studioPhotoHint').textContent=row.photo_url?'Une photo est déjà enregistrée. Choisissez un fichier pour la remplacer.':'Aucune photo enregistrée.';el('studioForm').scrollIntoView({behavior:'smooth',block:'start'});}
  function draw(){const type=el('studioFilter').value;const selected=rows.filter(r=>(type==='all'||r.kind===type)&&(role==='admin'||r.owner_id===user?.id));el('studioList').replaceChildren();if(!selected.length){el('studioList').textContent='Aucune annonce pour le moment.';return;}
  for(const r of selected){const box=document.createElement('div');box.className='studio-item';const name=document.createElement('div');name.innerHTML=`<strong>${esc(r.title)}</strong><small>${esc(kindLabels[r.kind]||r.kind)} · ${esc(statusLabels[r.status]||r.status)} · ${esc(r.place)}</small>`;const actions=document.createElement('div');actions.className='studio-item-actions';const editBtn=document.createElement('button');editBtn.textContent='Modifier';editBtn.onclick=()=>edit(r.id);actions.append(editBtn);
  if(role==='admin'&&r.status!=='published'){const pub=document.createElement('button');pub.textContent='Publier';pub.onclick=()=>setStatus(r.id,'published');actions.append(pub)}

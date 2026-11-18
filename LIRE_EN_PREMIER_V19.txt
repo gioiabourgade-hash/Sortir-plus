@@ -1,0 +1,9 @@
+SORTIR+ V19 — Photos d’ambiance, étudiants et espace pro
+
+Les huit images des restaurants sont des illustrations générées et ne représentent PAS les véritables établissements. Elles sont clairement signalées sur le site. Remplacez-les par des photos autorisées par les restaurants.
+
+Dans Espace pro, la croix sur la photo retire une sélection avant enregistrement ou retire la référence de la photo existante lors de la sauvegarde. La suppression physique du fichier dans Supabase Storage n’est pas effectuée.
+
+Les catégories Étudiants restent visibles ; cliquer sur une catégorie filtre les offres détaillées situées juste dessous. Aucune remise étudiante non confirmée n’est inventée.
+
+Installation : extraire le ZIP et envoyer tous les fichiers et le dossier images sur GitHub (racine du dépôt). Aucun changement SQL. Tester les comptes pro et la suppression de photo après publication.

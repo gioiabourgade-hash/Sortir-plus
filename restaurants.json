@@ -8,7 +8,8 @@
     "price": "20–30 € / personne (budget indicatif fourni)",
     "url": "https://utopy-cafe.fr/",
     "source": "https://utopy-cafe.fr/contactez-nous.html",
-    "hours": "Mer. 9h–18h · Jeu.–ven. 8h–18h · Sam. 9h–18h · Dim. 9h–17h"
+    "hours": "Mer. 9h–18h · Jeu.–ven. 8h–18h · Sam. 9h–18h · Dim. 9h–17h",
+    "illustration": "images/ambiance-restaurant-1.webp"
   },
   {
     "name": "BLŌSSOM",
@@ -19,7 +20,8 @@
     "price": "10–20 € / personne (budget indicatif fourni)",
     "url": "https://blossom-bordeaux.com/",
     "source": "https://blossom-bordeaux.com/",
-    "hours": "Tous les jours 11h–22h"
+    "hours": "Tous les jours 11h–22h",
+    "illustration": "images/ambiance-restaurant-2.webp"
   },
   {
     "name": "Pampa",
@@ -30,7 +32,8 @@
     "price": "30–40 € / personne (estimation Google, à confirmer)",
     "url": "https://www.google.com/maps/search/?api=1&query=Pampa+54+boulevard+Godard+Bordeaux",
     "source": "https://www.google.com/maps/search/?api=1&query=Pampa+54+boulevard+Godard+Bordeaux",
-    "hours": "Horaires à confirmer auprès du restaurant"
+    "hours": "Horaires à confirmer auprès du restaurant",
+    "illustration": "images/ambiance-restaurant-3.webp"
   },
   {
     "name": "Les Drôles",
@@ -41,7 +44,8 @@
     "price": "25–27 € / menu (hors suppléments)",
     "url": "https://www.restaurantlesdroles.fr/",
     "source": "https://www.restaurantlesdroles.fr/menus/",
-    "hours": "Horaires sur le site officiel"
+    "hours": "Horaires sur le site officiel",
+    "illustration": "images/ambiance-restaurant-4.webp"
   },
   {
     "name": "Tigermilk Bordeaux",
@@ -52,7 +56,8 @@
     "price": "Brunch du dimanche : 27 € (carte variable)",
     "url": "https://tigermilkrestaurants.com/fr/restaurants/bordeaux-bourse/",
     "source": "https://tigermilkrestaurants.com/wp-content/uploads/2026/02/Bordeaux-EN.pdf",
-    "hours": "Midi et soir ; brunch le dimanche"
+    "hours": "Midi et soir ; brunch le dimanche",
+    "illustration": "images/ambiance-restaurant-5.webp"
   },
   {
     "name": "Arcada",
@@ -63,7 +68,8 @@
     "price": "Tarifs à consulter sur la carte",
     "url": "https://www.google.com/maps/search/?api=1&query=Arcada+13+rue+de+la+Rousselle+Bordeaux",
     "source": "https://www.google.com/maps/search/?api=1&query=Arcada+13+rue+de+la+Rousselle+Bordeaux",
-    "hours": "Réservation et horaires à vérifier"
+    "hours": "Réservation et horaires à vérifier",
+    "illustration": "images/ambiance-restaurant-6.webp"
   },
   {
     "name": "Berthus",
@@ -74,7 +80,8 @@
     "price": "Menu autour de 29 € (à confirmer)",
     "url": "https://www.google.com/maps/search/?api=1&query=Berthus+15+rue+des+Bahutiers+Bordeaux",
     "source": "https://www.google.com/maps/search/?api=1&query=Berthus+15+rue+des+Bahutiers+Bordeaux",
-    "hours": "Réservation et horaires à vérifier"
+    "hours": "Réservation et horaires à vérifier",
+    "illustration": "images/ambiance-restaurant-7.webp"
   },
   {
     "name": "Osteria Palatino",
@@ -85,6 +92,7 @@
     "price": "Tarifs à consulter sur la carte",
     "url": "https://www.google.com/maps/search/?api=1&query=Osteria+Palatino+8+rue+de+la+Merci+Bordeaux",
     "source": "https://www.google.com/maps/search/?api=1&query=Osteria+Palatino+8+rue+de+la+Merci+Bordeaux",
-    "hours": "Ouvert midi et soir ; horaires à vérifier"
+    "hours": "Ouvert midi et soir ; horaires à vérifier",
+    "illustration": "images/ambiance-restaurant-8.webp"
   }
 ]
