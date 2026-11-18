@@ -17,7 +17,57 @@ function mapsUrl(item){return `https://www.google.com/maps/dir/?api=1&destinatio
 function activityCard(item){return `<article class="activity-card">${item.photo_url&&/^https:\/\//.test(item.photo_url)?`<img class="sortir-listing-photo" src="${safeText(item.photo_url)}" alt="Photo de ${safeText(item.name)}" loading="lazy">`:``}<div class="card-top"><span class="tag">${item.category} · ${item.place}</span><button class="favorite-btn ${favorites.has(item.id)?'is-favorite':''}" data-favorite="${item.id}" aria-label="${favorites.has(item.id)?'Retirer des':'Ajouter aux'} favoris">${favorites.has(item.id)?'♥':'♡'}</button></div><h3>${item.name}</h3><p>${item.description}</p><div class="card-meta"><span>${item.budget}</span><span>${item.setting}</span><span>${item.transport}</span></div><div class="card-bottom"><span>Lieu à découvrir</span><a class="mini-link" href="${mapsUrl(item)}" target="_blank" rel="noopener">Itinéraire ↗</a></div></article>`;}
 function renderActivities(){const q=($('#searchInput')?.value||'').trim().toLocaleLowerCase('fr'),cat=$('#categoryFilter')?.value||'Toutes',budget=$('#budgetFilter')?.value||'Tous',setting=$('#settingFilter')?.value||'Tous',onlyFav=$('#showFavorites')?.getAttribute('aria-pressed')==='true';const items=activities.filter(x=>(cat==='Toutes'||x.category===cat)&&(budget==='Tous'||x.budget===budget)&&(setting==='Tous'||x.setting===setting)&&(!onlyFav||favorites.has(x.id))&&`${x.name} ${x.description} ${x.category} ${x.place}`.toLocaleLowerCase('fr').includes(q));$('#activityCount').textContent=items.length+' sortie'+(items.length>1?'s':'')+' trouvée'+(items.length>1?'s':'');$('#allCards').innerHTML=items.length?items.map(activityCard).join(''):'<p>Aucun lieu ne correspond à ces filtres. Essaie une autre recherche.</p>';}
 function initMap(){if(map||!window.L||!$('#activityMap'))return;map=L.map('activityMap').setView([44.8378,-0.5792],12);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);markerLayer=L.layerGroup().addTo(map);renderMapMarkers();}
-function renderMapMarkers(){if(!map||!markerLayer)return;markerLayer.clearLayers();const cat=$('#mapCategory')?.value||'Toutes';activities.filter(x=>(cat==='Toutes'||x.category===cat)&&cat!=='Événements'&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)).forEach(x=>{const marker=L.circleMarker([x.lat,x.lng],{radius:9,color:'#fff',weight:2,fillColor:colors[x.category]||'#172d35',fillOpacity:1});marker.bindPopup(`<div class="map-popup"><strong>${x.name}</strong><span>${x.category} · ${x.place}</span><br><a href="${mapsUrl(x)}" target="_blank" rel="noopener">Itinéraire ↗</a></div>`).addTo(markerLayer);});if(cat==='Toutes'||cat==='Événements'){eventData.filter(e=>e.end>=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Paris'})).forEach(e=>{const pos=eventLocations[e.place];if(!pos)return;L.circleMarker(pos,{radius:10,color:'#ffffff',weight:2,fillColor:'#C46B3B',fillOpacity:1}).bindPopup(`<div class="map-popup"><strong>${safeText(e.title)}</strong><span>Événement · ${safeText(e.place)}</span><br><a href="#evenements">Voir la fiche événement ↗</a></div>`).addTo(markerLayer);});}}
+// Carte : repères des activités, événements et restaurants du catalogue public.
+const restaurantPositions = new Map();
+let restaurantGeocodingStarted = false;
+function restaurantDirections(item){return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(item.address+', France');}
+async function resolveRestaurantPositions(){
+ if(restaurantGeocodingStarted || !restaurants.length)return;
+ restaurantGeocodingStarted=true;
+ // Les coordonnées sont recherchées à partir des adresses, jamais inventées.
+ // Cache local pour éviter de répéter les requêtes à chaque visite.
+ for(const r of restaurants){
+  const key=(r.address||'').trim();if(!key)continue;
+  if(Number.isFinite(Number(r.lat))&&Number.isFinite(Number(r.lng))&&r.lat!==''&&r.lng!==''){
+   restaurantPositions.set(key,[Number(r.lat),Number(r.lng)]);continue;
+  }
+  const cacheKey='sortirplus-geo-v1-'+key;
+  try{const saved=JSON.parse(localStorage.getItem(cacheKey)||'null');if(Array.isArray(saved)&&saved.length===2&&saved.every(Number.isFinite)){restaurantPositions.set(key,saved);continue;}}catch(e){}
+  try{
+   const url='https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=fr&q='+encodeURIComponent(key+', France');
+   const response=await fetch(url,{headers:{'Accept':'application/json'}});
+   if(response.ok){const matches=await response.json();if(matches.length){const point=[Number(matches[0].lat),Number(matches[0].lon)];if(point.every(Number.isFinite)&&point[0]>44.5&&point[0]<45.2&&point[1]>-1.2&&point[1]<0.2){restaurantPositions.set(key,point);try{localStorage.setItem(cacheKey,JSON.stringify(point));}catch(e){}renderMapMarkers();}}}
+  }catch(e){}
+  // Respecter un délai entre les recherches d'adresses publiques.
+  await new Promise(resolve=>setTimeout(resolve,1100));
+ }
+}
+function renderMapMarkers(){
+ if(!map||!markerLayer)return;
+ markerLayer.clearLayers();
+ const cat=$('#mapCategory')?.value||'Toutes';
+ if(cat!=='Restaurants'&&cat!=='Événements'){
+  activities.filter(x=>(cat==='Toutes'||x.category===cat)&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)).forEach(x=>{
+   const marker=L.circleMarker([x.lat,x.lng],{radius:9,color:'#fff',weight:2,fillColor:colors[x.category]||'#172d35',fillOpacity:1});
+   marker.bindPopup(`<div class="map-popup"><strong>${safeText(x.name)}</strong><span>${safeText(x.category)} · ${safeText(x.place)}</span><br><a href="${mapsUrl(x)}" target="_blank" rel="noopener noreferrer">Itinéraire ↗</a></div>`).addTo(markerLayer);
+  });
+ }
+ if(cat==='Toutes'||cat==='Restaurants'){
+  restaurants.forEach(r=>{
+   const point=restaurantPositions.get((r.address||'').trim());if(!point)return;
+   L.circleMarker(point,{radius:10,color:'#fff',weight:2,fillColor:'#8b2948',fillOpacity:1})
+    .bindPopup(`<div class="map-popup"><strong>${safeText(r.name)}</strong><span>Restaurant · ${safeText(r.place||r.address)}</span><br><small>${safeText(r.price||'Tarif à vérifier')}</small><br><a href="${restaurantDirections(r)}" target="_blank" rel="noopener noreferrer">Itinéraire ↗</a> · <a href="#restaurants">Voir les restaurants ↗</a></div>`).addTo(markerLayer);
+  });
+  resolveRestaurantPositions();
+ }
+ if(cat==='Toutes'||cat==='Événements'){
+  eventData.filter(e=>e.end>=new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Paris'})).forEach(e=>{
+   const pos=eventLocations[e.place];if(!pos)return;
+   L.circleMarker(pos,{radius:10,color:'#ffffff',weight:2,fillColor:'#C46B3B',fillOpacity:1}).bindPopup(`<div class="map-popup"><strong>${safeText(e.title)}</strong><span>Événement · ${safeText(e.place)}</span><br><a href="#evenements">Voir la fiche événement ↗</a></div>`).addTo(markerLayer);
+  });
+ }
+}
+
 function navigate(){const route=location.hash.slice(1)||'accueil',allowed=['accueil','activites','carte','evenements','etudiants','decouvrir','culture','histoire','restaurants','avis','contact','admin'],target=allowed.includes(route)?route:'accueil';document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$('#page-'+target)?.classList.add('active');document.querySelectorAll('#mainNav a').forEach(a=>a.classList.toggle('selected',a.getAttribute('href')==='#'+target));$('#mainNav').classList.remove('open');$('#menuToggle').setAttribute('aria-expanded','false');window.scrollTo(0,0);if(target==='carte'){initMap();setTimeout(()=>map&&map.invalidateSize(),120);}}
 $('#menuToggle').addEventListener('click',()=>{const open=$('#mainNav').classList.toggle('open');$('#menuToggle').setAttribute('aria-expanded',String(open));});
 ['searchInput','categoryFilter','budgetFilter','settingFilter'].forEach(id=>$('#'+id)?.addEventListener(id==='searchInput'?'input':'change',renderActivities));
@@ -75,8 +125,8 @@ const catalogKeys=['name','category','place','description','address','url','pric
 function renderRestaurants(){const node=$('#restaurantCards');if(!node)return;node.innerHTML=restaurants.length?restaurants.map(x=>`<article class="feature-card">${x.photo_url&&/^https:\/\//.test(x.photo_url)?`<img class="sortir-listing-photo" src="${safeText(x.photo_url)}" alt="Photo de ${safeText(x.name)}" loading="lazy">`:`<img class="sortir-listing-photo" src="${safeText(x.illustration||'images/ambiance-restaurant-1.webp')}" alt="Illustration d’ambiance pour ${safeText(x.name)} (photo non contractuelle)" loading="lazy"><span class="photo-caption">Photo d’ambiance illustrative</span>`}<small>${safeText(x.category)}</small><h2>${safeText(x.name)}</h2><p>${safeText(x.description)}</p><p><strong>${safeText(x.place||x.address)}</strong></p><small>${safeText(x.price)}</small>${/^https:\/\//.test(x.url||'')?`<a href="${safeText(x.url)}" target="_blank" rel="noopener noreferrer">Informations / réservation ↗</a>`:''}</article>`).join(''):'<p>Les premières bonnes adresses arrivent bientôt.</p>';}
 async function loadPublicCatalogs(){
   for(const [file,callback] of [
-    ['restaurants.json',items=>{restaurants=items;renderRestaurants();}],
-    ['activites-plus.json',items=>{extraActivities=items;for(const item of items){if(item.id&&item.name&&!activities.some(a=>a.id===item.id))activities.push({...item,lat:item.lat?Number(item.lat):null,lng:item.lng?Number(item.lng):null,budget:item.price||'À vérifier',setting:'À vérifier',transport:'À vérifier'});}renderActivities();}]
+    ['restaurants.json',items=>{restaurants=items;restaurantGeocodingStarted=false;renderRestaurants();renderMapMarkers();}],
+    ['activites-plus.json',items=>{extraActivities=items;for(const item of items){if(item.id&&item.name&&!activities.some(a=>a.id===item.id))activities.push({...item,lat:item.lat?Number(item.lat):null,lng:item.lng?Number(item.lng):null,budget:item.price||'À vérifier',setting:'À vérifier',transport:'À vérifier'});}renderActivities();renderMapMarkers();}]
   ]){
     try{const response=await fetch(file+'?v='+Date.now());if(response.ok){const items=await response.json();if(Array.isArray(items))callback(items);}}catch(e){}
   }
@@ -93,7 +143,7 @@ $('#catalogType')?.addEventListener('change',()=>{catalogItems=[];catalogSha=nul
 $('#catalogAdd')?.addEventListener('click',()=>{if(!catalogSha)return catalogStatus('Charge d’abord le catalogue.');catalogOpen(-1)});
 $('#catalogCancel')?.addEventListener('click',()=>$('#catalogEdit').hidden=true);
 $('#catalogSave')?.addEventListener('click',()=>{const x={};for(const k of catalogKeys)x[k]=$('#catalog'+k[0].toUpperCase()+k.slice(1)).value.trim();if(!x.name)return catalogStatus('Le nom est obligatoire.');if(x.url&&!/^https:\/\//.test(x.url))return catalogStatus('Le lien doit commencer par https://');if(catalogIndex<0){x.id='custom-'+Date.now();catalogItems.push(x)}else catalogItems[catalogIndex]={...catalogItems[catalogIndex],...x};$('#catalogEdit').hidden=true;catalogRender();catalogStatus('Fiche prête à publier.');});
-$('#catalogPublish')?.addEventListener('click',async()=>{if(!catalogSha)return catalogStatus('Charge d’abord le catalogue.');if(!confirm('Publier ce catalogue sur GitHub ?'))return;try{const {branch}=adminConfig();const d=await catalogApi('PUT',{message:'Mise à jour '+catalogFile()+' via SORTIR+',content:adminEncode(JSON.stringify(catalogItems,null,2)+'\n'),sha:catalogSha,branch});catalogSha=d.content.sha;if($('#catalogType').value==='restaurants'){restaurants=catalogItems;renderRestaurants()}catalogStatus('Publié ! Recharge le site après le déploiement GitHub Pages.')}catch(e){catalogStatus(e.message)}});
+$('#catalogPublish')?.addEventListener('click',async()=>{if(!catalogSha)return catalogStatus('Charge d’abord le catalogue.');if(!confirm('Publier ce catalogue sur GitHub ?'))return;try{const {branch}=adminConfig();const d=await catalogApi('PUT',{message:'Mise à jour '+catalogFile()+' via SORTIR+',content:adminEncode(JSON.stringify(catalogItems,null,2)+'\n'),sha:catalogSha,branch});catalogSha=d.content.sha;if($('#catalogType').value==='restaurants'){restaurants=catalogItems;restaurantGeocodingStarted=false;renderRestaurants();renderMapMarkers()}catalogStatus('Publié ! Recharge le site après le déploiement GitHub Pages.')}catch(e){catalogStatus(e.message)}});
 
 // V12 : inclinaison légère à la souris, bascule au toucher, sans gêner les liens.
 (function(){
