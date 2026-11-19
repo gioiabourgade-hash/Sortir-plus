@@ -1,0 +1,10 @@
+SORTIR+ V20 — Page partenaires et offres de lancement
+
+1. Décompressez le ZIP.
+2. Déposez tous les fichiers et dossiers à la racine du dépôt GitHub Pages.
+3. Validez avec Commit changes.
+4. Ouvrez la rubrique « Devenir partenaire ».
+
+Inclus : présentation du projet, offre de lancement gratuite, tarifs indicatifs 19 € et 39 €, questions fréquentes et boutons de contact par e-mail.
+Les paiements et les statistiques de fréquentation ne sont PAS activés. Les offres payantes sont clairement indiquées comme non commercialisées.
+Les fichiers de connexion et les fonctionnalités de l’espace professionnel existant sont conservés.
