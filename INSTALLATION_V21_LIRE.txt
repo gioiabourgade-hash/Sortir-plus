@@ -1,0 +1,15 @@
+SORTIR+ V21 — MODE D'EMPLOI
+
+1. Décompresser le ZIP, puis envoyer TOUS les fichiers et dossiers dans la branche main du dépôt GitHub Sortir-plus. Les dossiers .github et tools doivent également être ajoutés. Sur GitHub, l'envoi d'un dossier caché peut nécessiter la création des fichiers via l'interface web ou un outil Git.
+2. Vérifier que le site GitHub Pages affiche bien la rubrique « Devenir partenaire » : tous les référencements sont gratuits pour le moment ; les prix de 19 € et 39 € ne sont PAS en vigueur.
+3. Les anciennes photos d'ambiance fictives ont été retirées. Pour afficher les véritables photos, demander au propriétaire l'autorisation de les réutiliser sur SORTIR+, puis renseigner photo_url avec une URL HTTPS autorisée ou utiliser la photo fournie dans l'espace professionnel. Les photos figurant sur un site ne sont pas automatiquement libres de droits.
+4. Actualisation des événements :
+   a) Créer une clé PUBLIQUE de lecture sur https://openagenda.com/ (préfixe oa_pk_).
+   b) Dans GitHub : Settings > Secrets and variables > Actions > New repository secret.
+   c) Nom : OPENAGENDA_PUBLIC_KEY ; valeur : votre clé publique.
+   d) Dans GitHub : Settings > Actions > General > Workflow permissions, autoriser Read and write permissions (si nécessaire).
+   e) Dans l'onglet Actions, ouvrir « Actualiser les événements de Bordeaux Métropole » puis « Run workflow » pour le premier lancement.
+   f) Ensuite, le programme est prévu une fois par jour, à 05:23 UTC. Les exécutions planifiées de GitHub Actions peuvent être retardées ou suspendues selon les règles GitHub.
+5. Le catalogue éditorial evenements.json reste indépendant. Le fichier evenements-auto.json est produit automatiquement. En cas d'échec, les anciens événements restent en place et les événements expirés sont masqués par le site.
+6. La synchronisation reprend les informations publiques de l'agenda Bordeaux Métropole sur OpenAgenda. Les images ne sont pas reprises automatiquement. Vérifier les conditions de réutilisation et les crédits des organisateurs.
+7. Cette archive n'est pas déployée automatiquement par ChatGPT : il faut la publier dans votre dépôt GitHub.

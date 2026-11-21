@@ -1,0 +1,28 @@
+name: Actualiser les événements de Bordeaux Métropole
+on:
+  schedule:
+    - cron: '23 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  actualiser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Importer les événements publics
+        env:
+          OPENAGENDA_PUBLIC_KEY: ${{ secrets.OPENAGENDA_PUBLIC_KEY }}
+        run: python tools/sync_events.py
+      - name: Publier les changements
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evenements-auto.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualisation automatique des événements"
+            git push
+          fi
