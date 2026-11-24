@@ -1,0 +1,12 @@
+create table if not exists public.sortir_revenue_links (id uuid primary key default gen_random_uuid(), title text not null, url text not null check (url ~ '^https://'), kind text not null check (kind in ('affiliate','experience')), description text not null default '', published boolean not null default false);
+alter table public.sortir_revenue_links enable row level security;
+create policy revenue_public on public.sortir_revenue_links for select to anon, authenticated using (published);
+create policy revenue_admin on public.sortir_revenue_links for all to authenticated using (public.my_sortir_role()='admin') with check (public.my_sortir_role()='admin');
+create table if not exists public.sortir_clicks (id uuid primary key default gen_random_uuid(), link_id uuid not null references public.sortir_revenue_links(id) on delete cascade, created_at timestamptz not null default now());
+alter table public.sortir_clicks enable row level security;
+create policy clicks_insert on public.sortir_clicks for insert to anon, authenticated with check (exists (select 1 from public.sortir_revenue_links l where l.id=link_id and l.published));
+create policy clicks_admin on public.sortir_clicks for select to authenticated using (public.my_sortir_role()='admin');
+grant select on public.sortir_revenue_links to anon;
+grant select,insert,update,delete on public.sortir_revenue_links to authenticated;
+grant insert on public.sortir_clicks to anon,authenticated;
+grant select on public.sortir_clicks to authenticated;

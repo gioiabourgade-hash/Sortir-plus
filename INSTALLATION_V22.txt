@@ -1,0 +1,8 @@
+SORTIR+ V22 — Monétisation
+1. Sauvegarder le dépôt actuel. Exécuter monetisation-v22.sql UNE FOIS dans Supabase SQL Editor (après V15 et profiles).
+2. Publier les fichiers du ZIP à la racine du dépôt GitHub existant.
+3. Connectez-vous comme administrateur dans Espace pro > Monétisation. Créez une offre avec un vrai lien HTTPS affilié ou de billetterie, cochez Publier.
+4. Vérifier la rubrique Expériences en navigation privée, puis le compteur de clics dans l'administration.
+Les offres sont initialement vides. Aucun compte partenaire ni paiement n'a été créé. Les réservations passent par des prestataires externes. Les clics ne sont pas des ventes, peuvent être incomplets ou artificiels. Aucun cookie de suivi ajouté par ce module. Prévoir information de confidentialité et conditions de vente adaptées avant lancement.
+AdSense : emplacement masqué réservé, aucun script publicitaire actif. Attendre validation du compte et mettre en place le consentement applicable avant activation.
+Les liens officiels existants restent inchangés ; les offres affiliées sont gérées dans la nouvelle rubrique Expériences.
